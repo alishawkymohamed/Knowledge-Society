@@ -1,4 +1,3 @@
-<form>
     <div class="row">
         <ngx-loading
         [show]="loading"
@@ -17,8 +16,12 @@
                     name="bornCity"
                 > -->
                 <br>
-                <select (change)="SelectBirthGoverment($event.target.value)">
-                  <option value="0">--اختر المحافظة--</option>
+                <select class="form-control" [(ngModel)]="BirthGovernment" (change)="SelectBirthGoverment($event.target.value)" >
+                  <option
+                  value="0"
+                  disabled
+                  selected
+                  >--اختر المحافظة--</option>
                   <option *ngFor="let GOV of GovernrateArray" value="{{GOV.ID}}" [innerText]="GOV.Name"></option>
                 </select>
             </div>
@@ -33,8 +36,10 @@
                     name="bornDistrict"
                 > -->
                 <br>
-                <select (change)="SelectBirthVillage($event.target.value)">
-                  <option value="0">--اختر المركز/الحي--</option>
+                <select class="form-control" [(ngModel)]="BirthArea" (change)="SelectBirthVillage($event.target.value)">
+                  <option                   value="0"
+                  disabled
+                  selected>--اختر المركز/الحي--</option>
                   <option *ngFor="let A of SelectedArias" value="{{A.ID}}" [innerText]="A.Name"></option>
                 </select>
             </div>
@@ -49,8 +54,10 @@
                     name="bornVillage"
                 > -->
                 <br>
-                <select id="bornVillage" name="bornVillage">
-                  <option value="0">--اختر القرية--</option>
+                <select class="form-control" [(ngModel)]="BirthVillage">
+                  <option value="0"
+                  disabled
+                  selected>--اختر القرية--</option>
                   <option *ngFor="let A of LivingVillageArray" value="{{A.ID}}" [innerText]="A.Name"></option>
                 </select>
             </div>
@@ -71,8 +78,10 @@
                     name="liveCity"
                 > -->
                 <br>
-                <select (change)="SelectLivingGoverment($event.target.value)">
-                  <option value="0">--اختر المحافظة--</option>
+                <select class="form-control" [(ngModel)]="livingGovernment"  (change)="SelectLivingGoverment($event.target.value)">
+                  <option                   value="0"
+                  disabled
+                  selected>--اختر المحافظة--</option>
                   <option *ngFor="let GOV of GovernrateArray" value="{{GOV.ID}}" [innerText]="GOV.Name"></option>
                 </select>
             </div>
@@ -87,8 +96,10 @@
                     name="liveDistrict"
                 > -->
                 <br>
-                <select (change)="SelectLivingVillage($event.target.value)">
-                  <option value="0">--اختر المركز/الحي--</option>
+                <select class="form-control" [(ngModel)]="livingArea" (change)="SelectLivingVillage($event.target.value)">
+                  <option                   value="0"
+                  disabled
+                  selected>--اختر المركز/الحي--</option>
                   <option *ngFor="let A of LivingAreaArray" value="{{A.ID}}" [innerText]="A.Name"></option>
                 </select>
               </div>
@@ -103,8 +114,10 @@
                     name="liveVillage"
                 > -->
                 <br>
-                <select>
-                  <option value="0">--اختر القرية--</option>
+                <select [(ngModel)]="livingVillage" class="form-control">
+                  <option value="0"
+                  disabled
+                  selected>--اختر القرية--</option>
                   <option *ngFor="let A of LivingVillageArray" value="{{A.ID}}" [innerText]="A.Name"></option>
                 </select>
             </div>
@@ -123,6 +136,7 @@
                     class="btn-success form-control"
                     type="submit"
                     value="حفظ وإستمرار"
+                    (click)="OnSubmit()"
                 >
             </div>
         </li>
@@ -144,4 +158,3 @@
             </div>
         </li>
     </div>
-</form>

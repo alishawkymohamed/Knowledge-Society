@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-import { Component, OnInit, ViewEncapsulation } from '@angular/core' ;
-import { FormGroup, FormControl, Validators } from '@angular/forms' ;
-import { UserDataService } from '../../shared/user-data.service' ;
-import { PasswordValidation } from './PasswordValidation.ValidationExtension' ;
-import { ApiService } from '../../shared/api.service' ;
-import { Observable } from 'rxjs/Observable' ;
-=======
 import { Component, OnInit, ViewEncapsulation, ViewContainerRef } from '@angular/core'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { UserDataService } from '../../shared/user-data.service'
@@ -16,7 +8,6 @@ import { RegisterService } from '../../shared/register.service';
 import { Router } from '@angular/router';
 import { ToastsManager } from 'ng2-toastr';
 import { StringConversion } from '../../shared/StringConverstion';
->>>>>>> d2169f74162f870e9c859fc574f224ae79218a9e
 
 @Component({
   selector: 'app-personal-data',
