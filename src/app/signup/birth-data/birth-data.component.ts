@@ -13,9 +13,9 @@ export class BirthDataComponent implements OnInit {
   public loading = false;
   GovernrateArray = [];
   AreaArray = [];
-  SelectedArias=[];
+  SelectedArias = [];
   LivingAreaArray = [];
-  VillageArray=[];
+  VillageArray = [];
   selectedVillages = [];
   LivingVillageArray = [];
 
@@ -27,60 +27,57 @@ export class BirthDataComponent implements OnInit {
   livingArea: any = 0;
   livingVillage: any = 0;
 
-  constructor(private ApiService: ApiService,private BirthData : BirthDataService,UserDataService: UserDataService) {
-    if(UserDataService.getUserData() === {}){
+  constructor(private ApiService: ApiService, private BirthData: BirthDataService, UserDataService: UserDataService) {
+    if (UserDataService.getUserData() === {}) {
 
     }
-    if(BirthData.GetData().Governrates.length == 0){
-    ApiService.ServerRequest('/GeneralData/GetBirthData','GET',null).subscribe(
-      (data) => {
-        BirthData.SetData(data);
-        const Sdata = BirthData.GetData();
-        this.GovernrateArray = Sdata.Governrates;
-        this.AreaArray = Sdata.Areas;
-        this.VillageArray = Sdata.Villages;
-        console.log(this.GovernrateArray);
-      }
-    )
+    if (BirthData.GetData().Governrates.length == 0) {
+      ApiService.ServerRequest('/GeneralData/GetBirthData', 'GET', null).subscribe(
+        (data) => {
+          BirthData.SetData(data);
+          const Sdata = BirthData.GetData();
+          this.GovernrateArray = Sdata.Governrates;
+          this.AreaArray = Sdata.Areas;
+          this.VillageArray = Sdata.Villages;
+          console.log(this.GovernrateArray);
+        }
+      )
+    }
   }
-   }
 
   ngOnInit() {
-<<<<<<< HEAD
-=======
 
   }
-  SelectBirthGoverment(ID: any){
+  SelectBirthGoverment(ID: any) {
     console.log(ID);
     this.SelectedArias = this.AreaArray.filter(
-      (value)=>{
+      (value) => {
         return Number.parseInt(value.GovernateID) === Number.parseInt(ID);
       }
     );
   }
-  SelectLivingGoverment(ID: any){
+  SelectLivingGoverment(ID: any) {
     console.log(ID);
     this.LivingAreaArray = this.AreaArray.filter(
-      (value)=>{
+      (value) => {
         return Number.parseInt(value.GovernateID) === Number.parseInt(ID);
       }
     );
->>>>>>> 0b267fc186fcb2daf23bd925977d0958c7f69f83
   }
 
-  SelectBirthVillage(ID:any){
+  SelectBirthVillage(ID: any) {
     console.log(ID);
     this.VillageArray = this.AreaArray.filter(
-      (value)=>{
+      (value) => {
         return Number.parseInt(value.AreaID) === Number.parseInt(ID);
       }
     );
   }
 
-  SelectLivingVillage(ID:any){
+  SelectLivingVillage(ID: any) {
     console.log(ID);
     this.VillageArray = this.AreaArray.filter(
-      (value)=>{
+      (value) => {
         return Number.parseInt(value.AreaID) === Number.parseInt(ID);
       }
     );
