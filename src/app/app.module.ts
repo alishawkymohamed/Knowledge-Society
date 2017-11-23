@@ -56,7 +56,6 @@ export class CustomOption extends ToastOptions {
     ApiService,
     BirthDataService,
     RegisterService
-
   ],
   bootstrap: [AppComponent]
 })
