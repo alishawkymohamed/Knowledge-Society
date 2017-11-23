@@ -1,9 +1,22 @@
+<<<<<<< HEAD
 import { Component, OnInit, ViewEncapsulation } from '@angular/core' ;
 import { FormGroup, FormControl, Validators } from '@angular/forms' ;
 import { UserDataService } from '../../shared/user-data.service' ;
 import { PasswordValidation } from './PasswordValidation.ValidationExtension' ;
 import { ApiService } from '../../shared/api.service' ;
 import { Observable } from 'rxjs/Observable' ;
+=======
+import { Component, OnInit, ViewEncapsulation, ViewContainerRef } from '@angular/core'
+import { FormGroup, FormControl, Validators } from '@angular/forms'
+import { UserDataService } from '../../shared/user-data.service'
+import { PasswordValidation } from './PasswordValidation.ValidationExtension';
+import { ApiService } from '../../shared/api.service';
+import { Observable } from 'rxjs/Observable';
+import { RegisterService } from '../../shared/register.service';
+import { Router } from '@angular/router';
+import { ToastsManager } from 'ng2-toastr';
+import { StringConversion } from '../../shared/StringConverstion';
+>>>>>>> d2169f74162f870e9c859fc574f224ae79218a9e
 
 @Component({
   selector: 'app-personal-data',
@@ -15,22 +28,29 @@ export class PersonalDataComponent implements OnInit {
   User: any;
   personalDataForm: FormGroup;
 
-  firstName: string = '';
-  lastName: string = '';
-  email: string = '';
-  password: string = '';
-  confirmPassword: string = '';
-  phone: string = '';
-  mobile: string = '';
-  facebook: string = '';
-  instagram: string = '';
-  linkedIn: string = '';
-  youtube: string = '';
-  twitter: string = '';
+  firstName: string = null;
+  lastName: string = null;
+  email: string = null;
+  password: string = null;
+  confirmPassword: string = null;
+  phone: string = null;
+  mobile: string = null;
+  facebook: string = null;
+  instagram: string = null;
+  linkedIn: string = null;
+  youtube: string = null;
+  twitter: string = null;
 
-  constructor(private UserDataService: UserDataService, private ApiService: ApiService) {
+  constructor(private UserDataService: UserDataService,
+    private ApiService: ApiService,
+    private RegisterService: RegisterService,
+    private router: Router,
+    public toastr: ToastsManager, vcr: ViewContainerRef
+  ) {
+    this.toastr.setRootViewContainerRef(vcr);
+
     this.User = this.UserDataService.getUserData();
-    if (this.User !== {}) {
+    if (this.User !== null) {
       this.firstName = this.User.FirstName;
       this.lastName = this.User.LastName;
       this.email = this.User.Email;
@@ -50,9 +70,9 @@ export class PersonalDataComponent implements OnInit {
     this.personalDataForm = new FormGroup({
       'firstName': new FormControl(this.firstName, [Validators.required]),
       'lastName': new FormControl(this.lastName),
-      'email': new FormControl(this.email, [Validators.required, Validators.email]),
+      'email': new FormControl({ value: this.email, disabled: this.email ? true : false }, [Validators.required, Validators.email]),
       'password': new FormControl(this.password, [Validators.required, Validators.minLength(8)]),
-      'confirmPassword': new FormControl(this.confirmPassword, [Validators.required]),
+      'confirmPassword': new FormControl(this.password, [Validators.required]),
       'phone': new FormControl(this.phone),
       'mobile': new FormControl(this.mobile),
       'facebook': new FormControl(this.facebook),
@@ -65,38 +85,56 @@ export class PersonalDataComponent implements OnInit {
 
   onSubmit() {
     console.log(this.personalDataForm);
-    this.User.FirstName = this.firstName;
-    this.User.LastName = this.lastName;
-    this.User.Email = this.email;
-    this.User.Password = this.password;
-    this.User.Phone = this.phone;
-    this.User.Mobile = this.mobile;
-    this.User.FaceBook = this.facebook;
-    this.User.Instagram = this.instagram;
-    this.User.LinkedIn = this.linkedIn;
-    this.User.Youtube = this.youtube;
-    this.User.Twitter = this.twitter;
-
-    this.ApiService.ServerRequest('/Register/Save', 'POST', this.User).subscribe(
-      (Respond) => {
-        this.User = Respond;
-        this.UserDataService.setUserData(Respond);
-        this.firstName = this.User.FirstName;
-        this.lastName = this.User.LastName;
-        this.email = this.User.Email;
-        this.password = this.User.Password;
-        this.phone = this.User.Phone;
-        this.mobile = this.User.Mobile;
-        this.facebook = this.User.FaceBook;
-        this.instagram = this.User.Instagram;
-        this.linkedIn = this.User.LinkedIn;
-        this.youtube = this.User.Youtube;
-        this.twitter = this.User.Twitter;
-      },
-      (error: Response) => {
-        return Observable.throw("لقد حدث خطأ ما .. من فضلك أعد المحاولة لاحقاً !!");
+    if (this.personalDataForm.valid) {
+      if (this.User == null) {
+        this.User = {};
       }
-    )
+      this.User.FirstName = this.personalDataForm.get('firstName').value;
+      this.User.LastName = this.personalDataForm.get('lastName').value;
+      this.User.Email = this.personalDataForm.get('email').value;
+      this.User.Password = StringConversion.Encrypt(this.personalDataForm.get('password').value);
+      this.User.Phone = this.personalDataForm.get('phone').value;
+      this.User.Mobile = this.personalDataForm.get('mobile').value;
+      this.User.FaceBook = this.personalDataForm.get('facebook').value;
+      this.User.Instagram = this.personalDataForm.get('instagram').value;
+      this.User.LinkedIn = this.personalDataForm.get('linkedIn').value;
+      this.User.Youtube = this.personalDataForm.get('youtube').value;
+      this.User.Twitter = this.personalDataForm.get('twitter').value;
+      console.log(this.User);
+
+      this.RegisterService.SendRegisterData({ TabName: "Personal Data", PersonalData: this.User }).subscribe(
+        (Response) => {
+          if (Response != false) {
+            this.toastr.success("تم تسجيل البيانات بنجاح ..");
+            this.router.navigate(['/account', 'signup', 'birthdaydata'])
+          }
+          else {
+            this.toastr.error("لقد حدث خطأ ما .. من فضلك أعد المحاولة لاحقاً !!", 'خطأ!');
+          }
+          // this.UserDataService.setUserData(Respond);
+          // this.User = this.UserDataService.getUserData();
+          // console.log(this.User);
+          // this.firstName = this.User.FirstName;
+          // this.lastName = this.User.LastName;
+          // this.email = this.User.Email;
+          // this.password = this.User.Password;
+          // this.confirmPassword = this.User.Password;
+          // this.phone = this.User.Phone;
+          // this.mobile = this.User.Mobile;
+          // this.facebook = this.User.FaceBook;
+          // this.instagram = this.User.Instagram;
+          // this.linkedIn = this.User.LinkedIn;
+          // this.youtube = this.User.Youtube;
+          // this.twitter = this.User.Twitter;
+        },
+        (error) => {
+          this.toastr.error(error, 'خطأ!');
+        }
+      )
+    }
+    else {
+      alert("a7aa");
+    }
   }
 
 }

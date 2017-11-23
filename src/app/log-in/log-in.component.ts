@@ -57,8 +57,8 @@ export class LogInComponent implements OnInit {
             localStorage.removeItem(StringConversion.Encrypt("authDataUser"));
             localStorage.setItem(StringConversion.Encrypt("authDataUser"), StringConversion.Encrypt(JSON.stringify(this.authModel)));
           }
+          this.toastr.success("تم الدخول بنجاح ..");
           this.router.navigate(['/account', 'signup']);
-          this.toastr.success("Successful Login !!");
         }
       },
       (error) => {

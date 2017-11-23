@@ -2,7 +2,7 @@ import { EventEmitter, Injectable } from "@angular/core";
 
 @Injectable()
 export class UserDataService {
-  private user = {};
+  private user = null;
 
   constructor() {
   }
