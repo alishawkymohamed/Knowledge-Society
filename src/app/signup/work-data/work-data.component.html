@@ -1,266 +1,280 @@
-<form>
-    <div class="row">
-        <div class="col-12">
-            <h5>الحالة العملية</h5>
-        </div>
-        <div class="col-md-3 col-sm-6">
-            <div class="radio radio-success">
-                <input
-                    type="radio"
-                    name="workOptions"
-                    id="std-notw"
-                    value="option1"
-                >
-                <label
-                    class="work-tab"
-                    for="std-notw"
-                >
-                    طالب ولا يعمل
-                </label>
-            </div>
-        </div>
-        <div class="col-md-3 col-sm-6">
-            <div class="radio radio-success">
-                <input
-                    type="radio"
-                    name="workOptions"
-                    id="notw"
-                    value="option2"
-                >
-                <label
-                    class="work-tab"
-                    for="notw"
-                >
-                    لا يعمل
-                </label>
-            </div>
-        </div>
-        <div class="col-md-3 col-sm-6">
-            <div class="radio radio-success">
-                <input
-                    type="radio"
-                    name="workOptions"
-                    id="std-work"
-                    value="option3"
-                >
-                <label
-                    class="work-tab"
-                    for="std-work"
-                >
-                    طالب و يعمل
-                </label>
-            </div>
-        </div>
-        <div class="col-md-3 col-sm-6">
-            <div class="radio radio-success">
-                <input
-                    type="radio"
-                    name="workOptions"
-                    id="work"
-                    value="option4"
-                >
-                <label
-                    class="work-tab"
-                    for="work"
-                >
-                    يعمل
-                </label>
-            </div>
+<div class="row">
+    <ngx-loading
+        [show]="loading"
+        [config]="{ backdropBorderRadius: '14px' }"
+    ></ngx-loading>
+    <div class="col-12">
+        <h5>الحالة العملية</h5>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <div class="radio radio-success">
+            <input
+                type="radio"
+                name="workOptions"
+                id="std-notw"
+                value="option1"
+            >
+            <label
+                class="work-tab"
+                for="std-notw"
+            >
+                طالب ولا يعمل
+            </label>
         </div>
     </div>
-    <div class="row">
-        <div class="col-12">
-            <h5>بيانات العمل</h5>
-        </div>
-        <div class="col-sm-4">
-            <div class="form-group control-group">
-                <label for="workCity">المحافظة</label>
-                <input
-                    type="text"
-                    class="selectrs form-control"
-                    id="workCity"
-                    name="workCity"
-                >
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="form-group control-group">
-                <label for="workDistrict">المركز / الحي</label>
-                <input
-                    type="text"
-                    class="selectrs form-control"
-                    id="workDistrict"
-                    name="workDistrict"
-                >
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="form-group control-group">
-                <label for="workVillage">القرية</label>
-                <input
-                    type="text"
-                    class="selectrs form-control"
-                    id="workVillage"
-                    name="workVillage"
-                >
-            </div>
+    <div class="col-md-3 col-sm-6">
+        <div class="radio radio-success">
+            <input
+                type="radio"
+                name="workOptions"
+                id="notw"
+                value="option2"
+            >
+            <label
+                class="work-tab"
+                for="notw"
+            >
+                لا يعمل
+            </label>
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-4">
-            <div class="form-group control-group">
-                <label for="workType">نوعية العمل</label>
-                <input
-                    type="text"
-                    class="selectrs form-control"
-                    id="workType"
-                    name="workType"
-                >
-            </div>
+    <div class="col-md-3 col-sm-6">
+        <div class="radio radio-success">
+            <input
+                type="radio"
+                name="workOptions"
+                id="std-work"
+                value="option3"
+            >
+            <label
+                class="work-tab"
+                for="std-work"
+            >
+                طالب و يعمل
+            </label>
         </div>
-        <div class="col-sm-4">
-            <div class="form-group control-group">
-                <label for="workHave">ملكية الجهة</label>
-                <input
-                    type="text"
-                    class="selectrs form-control"
-                    id="workHave"
-                    name="workHave"
-                >
-            </div>
+    </div>
+    <div class="col-md-3 col-sm-6">
+        <div class="radio radio-success">
+            <input
+                type="radio"
+                name="workOptions"
+                id="work"
+                value="option4"
+            >
+            <label
+                class="work-tab"
+                for="work"
+            >
+                يعمل
+            </label>
         </div>
-        <div class="col-sm-4 givemarg">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="radio radio-success">
-                        <input
-                            type="radio"
-                            name="nowOptions"
-                            id="now"
-                            value="option1"
-                        >
-                        <label
-                            class="work-tab"
-                            for="now"
-                        >
-                            حالية
-                        </label>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="radio radio-success">
-                        <input
-                            type="radio"
-                            name="nowOptions"
-                            id="old"
-                            value="option2"
-                        >
-                        <label
-                            class="work-tab"
-                            for="old"
-                        >
-                            سابقة
-                        </label>
-                    </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <h5>بيانات العمل</h5>
+    </div>
+    <div class="col-sm-4">
+        <div class="form-group control-group">
+            <label for="workCity">المحافظة</label>
+            <select
+                (change)="SelectWorkGoverment($event.target.value)"
+                class="form-control"
+            >
+                <option value="0">--اختر المحافظة--</option>
+                <option
+                    *ngFor="let GOV of GovernrateArray"
+                    value="{{GOV.ID}}"
+                    [innerText]="GOV.Name"
+                ></option>
+            </select>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="form-group control-group">
+            <label for="workDistrict">المركز / الحي</label>
+            <select
+                (change)="SelectWorkVillage($event.target.value)"
+                class="form-control"
+            >
+                <option value="0">--اختر المركز/الحي--</option>
+                <option
+                    *ngFor="let A of SelectedArias"
+                    value="{{A.ID}}"
+                    [innerText]="A.Name"
+                ></option>
+            </select>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="form-group control-group">
+            <label for="workVillage">القرية</label>
+            <select class="form-control">
+                <option value="0">--اختر القرية--</option>
+                <option
+                    *ngFor="let A of VillageArray"
+                    value="{{A.ID}}"
+                    [innerText]="A.Name"
+                ></option>
+            </select>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-4">
+        <div class="form-group control-group">
+            <label for="workType">نوعية العمل</label>
+            <input
+                type="text"
+                class="selectrs form-control"
+                id="workType"
+                name="workType"
+            >
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="form-group control-group">
+            <label for="workHave">ملكية الجهة</label>
+            <input
+                type="text"
+                class="selectrs form-control"
+                id="workHave"
+                name="workHave"
+            >
+        </div>
+    </div>
+    <div class="col-sm-4 givemarg">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="radio radio-success">
+                    <input
+                        type="radio"
+                        name="nowOptions"
+                        id="now"
+                        value="option1"
+                    >
+                    <label
+                        class="work-tab"
+                        for="now"
+                    >
+                        حالية
+                    </label>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="form-group control-group">
-                <label for="workRelation">العلاقة مع العمل</label>
-                <select
-                    class="form-control"
-                    id="workRelation"
-                    name="workRelation"
-                >
-                    <option
-                        value
-                        disabled
-                        selected
+            <div class="col-sm-6">
+                <div class="radio radio-success">
+                    <input
+                        type="radio"
+                        name="nowOptions"
+                        id="old"
+                        value="option2"
                     >
-                        .
-                    </option>
-                    <option value="o1">الان</option>
-                    <option value="o2">اختيار اخر</option>
-                    <option value="o3">اختيار ثالث</option>
-                </select>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="form-group control-group">
-                <label for="workDuration">مدة العمل</label>
-                <select
-                    class="form-control"
-                    id="workDuration"
-                    name="workDuration"
-                >
-                    <option
-                        value
-                        disabled
-                        selected
+                    <label
+                        class="work-tab"
+                        for="old"
                     >
-                        .
-                    </option>
-                    <option value="o1">الان</option>
-                    <option value="o2">اختيار اخر</option>
-                    <option value="o3">اختيار ثالث</option>
-                </select>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="form-group control-group">
-                <label for="workTime">الوقت المخصص للعمل</label>
-                <select
-                    class="form-control"
-                    id="workTime"
-                    name="workTime"
-                >
-                    <option
-                        value
-                        disabled
-                        selected
-                    >
-                        .
-                    </option>
-                    <option value="o1">الان</option>
-                    <option value="o2">اختيار اخر</option>
-                    <option value="o3">اختيار ثالث</option>
-                </select>
+                        سابقة
+                    </label>
+                </div>
             </div>
         </div>
     </div>
-    <div class="pager wizard row justify-content-center">
-        <li class="col-lg-2 col-md-3 col-sm-4 next">
-            <div class="form-group">
-                <label
-                    for
-                    style="opacity:0"
+    <div class="col-sm-4">
+        <div class="form-group control-group">
+            <label for="workRelation">العلاقة مع العمل</label>
+            <select
+                class="form-control"
+                id="workRelation"
+                name="workRelation"
+            >
+                <option
+                    value
+                    disabled
+                    selected
                 >
-                    حفظ وإستمرار
-                </label>
+                    .
+                </option>
+                <option value="o1">الان</option>
+                <option value="o2">اختيار اخر</option>
+                <option value="o3">اختيار ثالث</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="form-group control-group">
+            <label for="workDuration">مدة العمل</label>
+            <select
+                class="form-control"
+                id="workDuration"
+                name="workDuration"
+            >
+                <option
+                    value
+                    disabled
+                    selected
+                >
+                    .
+                </option>
+                <option value="o1">الان</option>
+                <option value="o2">اختيار اخر</option>
+                <option value="o3">اختيار ثالث</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="form-group control-group">
+            <label for="workTime">الوقت المخصص للعمل</label>
+            <select
+                class="form-control"
+                id="workTime"
+                name="workTime"
+            >
+                <option
+                    value
+                    disabled
+                    selected
+                >
+                    .
+                </option>
+                <option value="o1">الان</option>
+                <option value="o2">اختيار اخر</option>
+                <option value="o3">اختيار ثالث</option>
+            </select>
+        </div>
+    </div>
+</div>
+<div class="pager wizard row justify-content-center">
+    <li class="col-lg-2 col-md-3 col-sm-4 next">
+        <div class="form-group">
+            <label
+                for
+                style="opacity:0"
+            >
+                حفظ وإستمرار
+            </label>
+            <input
+                class="btn-success form-control"
+                type="submit"
+                value="حفظ وإستمرار"
+            >
+        </div>
+    </li>
+    <li class="col-lg-2 col-md-3 col-sm-4 previous disabled">
+        <div class="form-group">
+            <label
+                for
+                style="opacity:0"
+            >
+                العودة
+            </label>
+            <a href="#">
                 <input
                     class="btn-success form-control"
-                    type="submit"
-                    value="حفظ وإستمرار"
+                    type="button"
+                    value="العودة"
                 >
-            </div>
-        </li>
-        <li class="col-lg-2 col-md-3 col-sm-4 previous disabled">
-            <div class="form-group">
-                <label
-                    for
-                    style="opacity:0"
-                >
-                    العودة
-                </label>
-                <a href="#">
-                    <input
-                        class="btn-success form-control"
-                        type="button"
-                        value="العودة"
-                    >
-                </a>
-            </div>
-        </li>
-    </div>
-</form>
+            </a>
+        </div>
+    </li>
+</div>

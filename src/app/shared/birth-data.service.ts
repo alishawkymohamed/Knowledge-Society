@@ -8,15 +8,15 @@ export class BirthDataService {
   constructor() { }
 
   public SetData(data: any) {
-    console.log('fromService');
     this.Governrates = data.GoverateData;
     this.Areas = data.Areas;
     this.Villages = data.Villages;
   }
-public GetData() {
-  return {'Governrates' : this.Governrates,
-          'Areas': this.Areas,
-          'Villages': this.Governrates
-        };
-}
+  public GetData() {
+    return {
+      'Governrates': this.Governrates,
+      'Areas': this.Areas,
+      'Villages': this.Governrates
+    };
+  }
 }

@@ -1,8 +1,8 @@
 <form>
     <div class="row">
         <ngx-loading
-        [show]="loading"
-        [config]="{ backdropBorderRadius: '14px' }"
+            [show]="loading"
+            [config]="{ backdropBorderRadius: '14px' }"
         ></ngx-loading>
         <div class="col-12">
             <h5>محل الميلاد</h5>
@@ -18,8 +18,12 @@
                 > -->
                 <br>
                 <select (change)="SelectBirthGoverment($event.target.value)">
-                  <option value="0">--اختر المحافظة--</option>
-                  <option *ngFor="let GOV of GovernrateArray" value="{{GOV.ID}}" [innerText]="GOV.Name"></option>
+                    <option value="0">--اختر المحافظة--</option>
+                    <option
+                        *ngFor="let GOV of GovernrateArray"
+                        value="{{GOV.ID}}"
+                        [innerText]="GOV.Name"
+                    ></option>
                 </select>
             </div>
         </div>
@@ -34,8 +38,12 @@
                 > -->
                 <br>
                 <select (change)="SelectBirthVillage($event.target.value)">
-                  <option value="0">--اختر المركز/الحي--</option>
-                  <option *ngFor="let A of SelectedArias" value="{{A.ID}}" [innerText]="A.Name"></option>
+                    <option value="0">--اختر المركز/الحي--</option>
+                    <option
+                        *ngFor="let A of SelectedArias"
+                        value="{{A.ID}}"
+                        [innerText]="A.Name"
+                    ></option>
                 </select>
             </div>
         </div>
@@ -49,9 +57,16 @@
                     name="bornVillage"
                 > -->
                 <br>
-                <select id="bornVillage" name="bornVillage">
-                  <option value="0">--اختر القرية--</option>
-                  <option *ngFor="let A of LivingVillageArray" value="{{A.ID}}" [innerText]="A.Name"></option>
+                <select
+                    id="bornVillage"
+                    name="bornVillage"
+                >
+                    <option value="0">--اختر القرية--</option>
+                    <option
+                        *ngFor="let A of LivingVillageArray"
+                        value="{{A.ID}}"
+                        [innerText]="A.Name"
+                    ></option>
                 </select>
             </div>
         </div>
@@ -72,8 +87,12 @@
                 > -->
                 <br>
                 <select (change)="SelectLivingGoverment($event.target.value)">
-                  <option value="0">--اختر المحافظة--</option>
-                  <option *ngFor="let GOV of GovernrateArray" value="{{GOV.ID}}" [innerText]="GOV.Name"></option>
+                    <option value="0">--اختر المحافظة--</option>
+                    <option
+                        *ngFor="let GOV of GovernrateArray"
+                        value="{{GOV.ID}}"
+                        [innerText]="GOV.Name"
+                    ></option>
                 </select>
             </div>
         </div>
@@ -88,10 +107,14 @@
                 > -->
                 <br>
                 <select (change)="SelectLivingVillage($event.target.value)">
-                  <option value="0">--اختر المركز/الحي--</option>
-                  <option *ngFor="let A of LivingAreaArray" value="{{A.ID}}" [innerText]="A.Name"></option>
+                    <option value="0">--اختر المركز/الحي--</option>
+                    <option
+                        *ngFor="let A of LivingAreaArray"
+                        value="{{A.ID}}"
+                        [innerText]="A.Name"
+                    ></option>
                 </select>
-              </div>
+            </div>
         </div>
         <div class="col-sm-4">
             <div class="form-group control-group">
@@ -104,8 +127,12 @@
                 > -->
                 <br>
                 <select>
-                  <option value="0">--اختر القرية--</option>
-                  <option *ngFor="let A of LivingVillageArray" value="{{A.ID}}" [innerText]="A.Name"></option>
+                    <option value="0">--اختر القرية--</option>
+                    <option
+                        *ngFor="let A of LivingVillageArray"
+                        value="{{A.ID}}"
+                        [innerText]="A.Name"
+                    ></option>
                 </select>
             </div>
         </div>

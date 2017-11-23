@@ -54,11 +54,8 @@ export class CustomOption extends ToastOptions {
     UserDataService,
     { provide: ToastOptions, useClass: CustomOption },
     ApiService,
-<<<<<<< HEAD
-    BirthDataService
-=======
+    BirthDataService,
     RegisterService
->>>>>>> d2169f74162f870e9c859fc574f224ae79218a9e
 
   ],
   bootstrap: [AppComponent]
