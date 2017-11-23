@@ -1,0 +1,147 @@
+<section id="wizard">
+    <div class="pre-page">
+        <div class="container">
+            <div class="row justify-content-sm-between align-items-center mb-5">
+                <div class="col-sm-4">
+                    <img
+                        class="logo-reg"
+                        src="assets/img/logo.png"
+                        alt
+                    >
+                </div>
+                <div class="col-sm-8 text-sm-left mt-5 but-reg">
+                    <a [routerLink]="['/account','login']">
+                        <button
+                            type="button"
+                            class="btn btn-danger"
+                        >
+                            تسجيل الدخول
+                        </button>
+                    </a>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <!-- Nav tabs -->
+
+            <div class="clearfix"></div>
+            <div class="form-horizontal">
+                <div id="rootwizard">
+                    <div class="tabs-all">
+                        <ul
+                            class="nav nav-pills nav-tabs flex-wrap"
+                            role="tablist"
+                        >
+                            <hr class="getback">
+                            <li
+                                [routerLinkActive]="'active'"
+                                [routerLinkActiveOptions]="{exact:true}"
+                                class="nav-item col-lg-3 col-md-6 col-12 pl-md-0"
+                            >
+                                <a
+                                    class="nav-link"
+                                    [routerLink]="['personaldata']"
+                                >
+                                    <div class="containimg">
+                                        <img
+                                            class="theimg"
+                                            src="assets/img/icon-main.png"
+                                            alt
+                                        >
+                                    </div>
+                                    البيانات الأساسية
+                                </a>
+                            </li>
+                            <li
+                                [routerLinkActive]="'active'"
+                                [routerLinkActiveOptions]="{exact:true}"
+                                class="nav-item col-lg-3 col-md-6 col-12 pl-md-0"
+                            >
+                                <a
+                                    class="nav-link"
+                                    [routerLink]="['birthdaydata']"
+                                >
+                                    <div class="containimg">
+                                        <img
+                                            class="theimg"
+                                            src="assets/img/icon-location.png"
+                                            alt
+                                        >
+                                    </div>
+                                    محل الميلاد والإقامة
+                                </a>
+                            </li>
+                            <li
+                                [routerLinkActive]="'active'"
+                                [routerLinkActiveOptions]="{exact:true}"
+                                class="nav-item col-lg-2 col-md-6 col-12 pr-md-0"
+                            >
+                                <a
+                                    class="nav-link"
+                                    [routerLink]="['workdata']"
+                                >
+                                    <div class="containimg">
+                                        <img
+                                            class="theimg"
+                                            src="assets/img/icon-work.png"
+                                            alt
+                                        >
+                                    </div>
+                                    بيانات العمل
+                                </a>
+                            </li>
+                            <!-- <li class="finished nav-item col-lg-2 col-md-6 col-12 pl-md-0"> -->
+                            <li
+                                [routerLinkActive]="'active'"
+                                [routerLinkActiveOptions]="{exact:true}"
+                                class="nav-item col-lg-2 col-md-6 col-12 pl-md-0"
+                            >
+                                <a
+                                    class="nav-link"
+                                    [routerLink]="['educationdata']"
+                                >
+                                    <div class="containimg">
+                                        <img
+                                            class="theimg"
+                                            src="assets/img/icon-grades.png"
+                                            alt
+                                        >
+                                    </div>
+                                    المؤهلات
+                                </a>
+                            </li>
+                            <li
+                                [routerLinkActive]="'active'"
+                                [routerLinkActiveOptions]="{exact:true}"
+                                class="nav-item col-lg-2 col-md-12 col-12 pr-md-0"
+                            >
+                                <a
+                                    class="nav-link"
+                                    [routerLink]="['extradata']"
+                                >
+                                    <div class="containimg">
+                                        <img
+                                            class="theimg"
+                                            src="assets/img/icon-general.png"
+                                            alt
+                                        >
+                                    </div>
+                                    خبرات عامة
+                                </a>
+                            </li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content card">
+                            <div
+                                class="tab-pane active"
+                                role="tabpanel"
+                            >
+                                <router-outlet></router-outlet>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</section>

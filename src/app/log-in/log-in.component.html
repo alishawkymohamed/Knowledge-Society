@@ -1,0 +1,160 @@
+<div class="pre-page">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-10 col-lg-12 col-md-11 col-9 card text-center">
+                <ngx-loading
+                    [show]="loading"
+                    [config]="{ backdropBorderRadius: '14px' }"
+                ></ngx-loading>
+                <img
+                    class="card-img-top"
+                    src="assets/img/logo.png"
+                    alt="Logo"
+                >
+                <div class="card-block">
+                    <h4 class="card-title">مرحبًا بك في المجتمع المعرفي</h4>
+                    <p class="card-text mb-5">
+                        يمكنك الدخول أو تسجيل عضوية جديدة من هنا
+                    </p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form
+                                role="form"
+                                (ngSubmit)="onSubmit()"
+                                #loginForm="ngForm"
+                            >
+                                <div class="form-group text-right">
+                                    <label for="inputUsernameEmail">البريد الإلكتروني</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="inputUsernameEmail"
+                                        [(ngModel)]="authModel.email"
+                                        name="email"
+                                        required
+                                        email
+                                        #email="ngModel"
+                                    >
+                                    <span
+                                        class="help-block"
+                                        *ngIf="(!email.valid && email.touched)"
+                                    >
+                                        من فضلك أدخل بريد إلكتروني صحيح !!
+                                    </span>
+                                </div>
+                                <div class="form-group">
+                                    <a
+                                        class="pull-left"
+                                        href="#"
+                                    >
+                                        نسيت كلمة المرور؟
+                                    </a>
+                                    <label
+                                        for="inputPassword"
+                                        style="float:right;"
+                                    >
+                                        كلمة السر
+                                    </label>
+                                    <input
+                                        type="password"
+                                        class="form-control"
+                                        id="inputPassword"
+                                        [(ngModel)]="authModel.password"
+                                        name="password"
+                                        required
+                                        #password="ngModel"
+                                    >
+                                    <span
+                                        class="help-block pull-right"
+                                        *ngIf="(!password.valid && password.touched)"
+                                    >
+                                        من فضلك أدخل كلمة السر !!
+                                    </span>
+                                </div>
+                                <br>
+                                <div class="checkbox pull-right">
+                                    <label class="mt-2">
+                                        <input
+                                            type="checkbox"
+                                            ngModel
+                                            name="rememberMe"
+                                        >
+                                        تذكرني
+                                    </label>
+                                </div>
+                                <button
+                                    type="submit"
+                                    [disabled]="!loginForm.valid"
+                                    class="btn btn-success mt-1 float-left"
+                                >
+                                    تسجيل الدخول
+                                </button>
+                            </form>
+                            <div
+                                class="pull-right"
+                                *ngIf="wrongCredintials"
+                            >
+                                <br>
+                                <br>
+                                <span class="help-block">البيانات التي أدخلتها غير صحيحة !!</span>
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <div class="col-md-6 socials mt-md-0 mt-sm-5">
+                            أو يمكنك
+                            <br>
+                            التسجيل عبر الشبكات الإجتماعية
+                            <div class="col-12 mt-3">
+                                <div class="btn-group">
+                                    <button
+                                        type="button"
+                                        class="btn btn-primary"
+                                    >
+                                        تسجيل الدخول عبر
+                                        <i class="fa fa-facebook"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-12 mt-3 mb-3">
+                                <div class="btn-group">
+                                    <button
+                                        type="button"
+                                        class="btn btn-danger"
+                                    >
+                                        تسجيل الدخول عبر
+                                        <i class="fa fa-google-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="btn-group">
+                                    <button
+                                        type="button"
+                                        class="btn btn-info"
+                                    >
+                                        تسجيل الدخول عبر
+                                        <i class="fa fa-linkedin"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 text-center mt-3">
+                            <div class="new-mem mt-4">
+                                هل أنت عضو جديد؟
+                                <a [routerLink]="['/account','signup']">
+                                    <button
+                                        type="button"
+                                        class="btn btn-secondary mt-1"
+                                    >
+                                        تسجيل عضوية جديدة
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

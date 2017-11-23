@@ -1,0 +1,251 @@
+<form>
+    <div class="row">
+        <div class="col-12">
+            <h5>المؤهل الدراسي</h5>
+        </div>
+    </div>
+    <br>
+    <div
+        class="row clearfix"
+        align="center"
+    >
+        <div class="col-md-12">
+            <table
+                class="table table-bordered table-hover table-responsive"
+                id="grades_table"
+            >
+                <thead>
+                    <tr>
+                        <th class="text-center">م</th>
+                        <th class="text-center">المؤهل</th>
+                        <th class="text-center">الجامعة</th>
+                        <th class="text-center">التخصص</th>
+                        <th class="text-center">السنة</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="addr0">
+                        <td>1</td>
+                        <td>
+                            <input
+                                type="text"
+                                name="gr0"
+                                class="form-control"
+                            >
+                        </td>
+                        <td>
+                            <input
+                                type="text"
+                                name="un0"
+                                class="form-control"
+                            >
+                        </td>
+                        <td>
+                            <input
+                                type="text"
+                                name="sp0"
+                                class="form-control"
+                            >
+                        </td>
+                        <td>
+                            <input
+                                type="text"
+                                name="ye0"
+                                class="form-control"
+                            >
+                        </td>
+                    </tr>
+                    <tr id="addr1"></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="add-remove col-md-12">
+            <div class="row">
+                <a
+                    style="margin: 0 auto;"
+                    id="add_row"
+                    class="btn btn-success col-md-3 col-sm-4"
+                >
+                    إضافة مؤهل
+                </a>
+                <p></p>
+                <a
+                    style="margin: 0 auto;"
+                    id="delete_row"
+                    class="btn btn-danger col-md-3 col-sm-4"
+                >
+                    حذف أخر إدخال
+                </a>
+                <p></p>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col-12">
+            <h5>الدورات التدريبية</h5>
+        </div>
+    </div>
+    <br>
+    <div
+        class="row clearfix"
+        align="center"
+    >
+        <div class="col-md-12">
+            <table
+                class="table table-bordered table-hover"
+                id="courses_table"
+            >
+                <thead>
+                    <tr>
+                        <th class="text-center">م</th>
+                        <th class="text-center">الدورة التدريبية</th>
+                        <th class="text-center">السنة</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="addcourses0">
+                        <td>1</td>
+                        <td>
+                            <input
+                                type="text"
+                                name="co0"
+                                class="form-control"
+                            >
+                        </td>
+                        <td>
+                            <input
+                                type="text"
+                                name="coy0"
+                                class="form-control"
+                            >
+                        </td>
+                    </tr>
+                    <tr id="addcourses1"></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="add-remove col-md-12">
+            <div class="row">
+                <a
+                    style="margin: 0 auto;"
+                    id="add_rowc"
+                    class="btn btn-success col-md-3 col-sm-4"
+                >
+                    إضافة دورة
+                </a>
+                <p></p>
+                <a
+                    style="margin: 0 auto;"
+                    id="delete_rowc"
+                    class="btn btn-danger col-md-3 col-sm-4"
+                >
+                    حذف أخر إدخال
+                </a>
+                <p></p>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-12">
+            <h5>الخبرات المؤسسية</h5>
+        </div>
+    </div>
+    <br>
+    <div
+        class="row clearfix"
+        align="center"
+    >
+        <div class="col-md-12">
+            <table
+                class="table table-bordered table-hover"
+                id="exp_table"
+            >
+                <thead>
+                    <tr>
+                        <th class="text-center">م</th>
+                        <th class="text-center">الخبرة المؤسسية</th>
+                        <th class="text-center">المدة</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="addexp0">
+                        <td>1</td>
+                        <td>
+                            <input
+                                type="text"
+                                name="exp0"
+                                class="form-control"
+                            >
+                        </td>
+                        <td>
+                            <input
+                                type="text"
+                                name="expy0"
+                                class="form-control"
+                            >
+                        </td>
+                    </tr>
+                    <tr id="addexp1"></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="add-remove col-md-12">
+            <div class="row">
+                <a
+                    style="margin: 0 auto;"
+                    id="add_rowe"
+                    class="btn btn-success col-md-3 col-sm-4"
+                >
+                    إضافة خبرة
+                </a>
+                <p></p>
+                <a
+                    style="margin: 0 auto;"
+                    id="delete_rowe"
+                    class="btn btn-danger col-md-3 col-sm-4"
+                >
+                    حذف أخر إدخال
+                </a>
+                <p></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="pager wizard row justify-content-center">
+        <li class="col-lg-2 col-md-3 col-sm-4 next">
+            <div class="form-group">
+                <label
+                    for
+                    style="opacity:0"
+                >
+                    حفظ وإستمرار
+                </label>
+                <input
+                    class="btn-success form-control"
+                    type="submit"
+                    value="حفظ وإستمرار"
+                >
+            </div>
+        </li>
+        <li class="col-lg-2 col-md-3 col-sm-4 previous disabled">
+            <div class="form-group">
+                <label
+                    for
+                    style="opacity:0"
+                >
+                    العودة
+                </label>
+                <a href="#">
+                    <input
+                        class="btn-success form-control"
+                        type="button"
+                        value="العودة"
+                    >
+                </a>
+            </div>
+        </li>
+    </div>
+</form>
