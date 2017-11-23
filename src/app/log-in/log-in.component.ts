@@ -28,7 +28,7 @@ export class LogInComponent implements OnInit {
     private UserDataService: UserDataService,
     public toastr: ToastsManager, vcr: ViewContainerRef) {
 
-    this.toastr.setRootViewContainerRef(vcr);
+    this.toastr.setRootViewContainerRef(vcr); // Toaster
     const authData = localStorage.getItem(StringConversion.Encrypt("authDataUser"));
     if (authData) {
       this.authModel = JSON.parse(StringConversion.Decrypt(authData));

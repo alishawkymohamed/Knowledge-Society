@@ -11,7 +11,6 @@ export class BirthDataComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    sad = 1;
   }
 
 }

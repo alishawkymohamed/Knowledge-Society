@@ -3,6 +3,10 @@
     (ngSubmit)="onSubmit()"
 >
     <div class="row">
+        <ngx-loading
+            [show]="loading"
+            [config]="{ backdropBorderRadius: '14px' }"
+        ></ngx-loading>
         <div class="col-12">
             <h5>البيانات الشخصية</h5>
         </div>
@@ -87,10 +91,10 @@
                 >
             </div>
             <div
-                *ngIf="personalDataForm.get('confirmPassword').valid && personalDataForm.get('confirmPassword').touched"
-                class="alert alert-success"
+                *ngIf="!personalDataForm.get('confirmPassword').valid && personalDataForm.get('confirmPassword').touched"
+                class="alert alert-danger"
             >
-                كلمة السر متطابقة
+                كلمة السر غير متطابقة
             </div>
         </div>
 
