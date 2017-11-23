@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 import { Component, OnInit, ViewEncapsulation, ViewContainerRef } from '@angular/core'
 import { FormGroup, FormControl, Validators } from '@angular/forms'
 import { UserDataService } from '../../shared/user-data.service'
+=======
+import { Component, OnInit, ViewEncapsulation, ViewContainerRef } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { UserDataService } from '../../shared/user-data.service';
+>>>>>>> 036c51d52b7a4ffa5ee3c8ff811f6387be8d0199
 import { PasswordValidation } from './PasswordValidation.ValidationExtension';
 import { ApiService } from '../../shared/api.service';
 import { Observable } from 'rxjs/Observable';
@@ -16,6 +22,8 @@ import { StringConversion } from '../../shared/StringConverstion';
   encapsulation: ViewEncapsulation.None
 })
 export class PersonalDataComponent implements OnInit {
+  public loading = false; //Loader Controller
+
   User: any;
   personalDataForm: FormGroup;
 
@@ -75,7 +83,7 @@ export class PersonalDataComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.personalDataForm);
+    this.loading = true;
     if (this.personalDataForm.valid) {
       if (this.User == null) {
         this.User = {};
@@ -91,32 +99,18 @@ export class PersonalDataComponent implements OnInit {
       this.User.LinkedIn = this.personalDataForm.get('linkedIn').value;
       this.User.Youtube = this.personalDataForm.get('youtube').value;
       this.User.Twitter = this.personalDataForm.get('twitter').value;
-      console.log(this.User);
 
       this.RegisterService.SendRegisterData({ TabName: "Personal Data", PersonalData: this.User }).subscribe(
         (Response) => {
           if (Response != false) {
+            this.loading = false;
             this.toastr.success("تم تسجيل البيانات بنجاح ..");
             this.router.navigate(['/account', 'signup', 'birthdaydata'])
           }
           else {
+            this.loading = false;
             this.toastr.error("لقد حدث خطأ ما .. من فضلك أعد المحاولة لاحقاً !!", 'خطأ!');
           }
-          // this.UserDataService.setUserData(Respond);
-          // this.User = this.UserDataService.getUserData();
-          // console.log(this.User);
-          // this.firstName = this.User.FirstName;
-          // this.lastName = this.User.LastName;
-          // this.email = this.User.Email;
-          // this.password = this.User.Password;
-          // this.confirmPassword = this.User.Password;
-          // this.phone = this.User.Phone;
-          // this.mobile = this.User.Mobile;
-          // this.facebook = this.User.FaceBook;
-          // this.instagram = this.User.Instagram;
-          // this.linkedIn = this.User.LinkedIn;
-          // this.youtube = this.User.Youtube;
-          // this.twitter = this.User.Twitter;
         },
         (error) => {
           this.toastr.error(error, 'خطأ!');
@@ -124,7 +118,7 @@ export class PersonalDataComponent implements OnInit {
       )
     }
     else {
-      alert("a7aa");
+      this.toastr.error("", 'خطأ!');
     }
   }
 

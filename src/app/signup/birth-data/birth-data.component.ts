@@ -18,9 +18,9 @@ export class BirthDataComponent implements OnInit {
   public loading = true;
   GovernrateArray = [];
   AreaArray = [];
-  SelectedArias=[];
+  SelectedArias = [];
   LivingAreaArray = [];
-  VillageArray=[];
+  VillageArray = [];
   selectedVillages = [];
   LivingVillageArray = [];
 
@@ -69,14 +69,14 @@ export class BirthDataComponent implements OnInit {
   }
   SelectBirthGoverment(ID: any){
     this.SelectedArias = this.AreaArray.filter(
-      (value)=>{
+      (value) => {
         return Number.parseInt(value.GovernateID) === Number.parseInt(ID);
       }
     );
   }
   SelectLivingGoverment(ID: any){
     this.LivingAreaArray = this.AreaArray.filter(
-      (value)=>{
+      (value) => {
         return Number.parseInt(value.GovernateID) === Number.parseInt(ID);
       }
     );
@@ -84,7 +84,7 @@ export class BirthDataComponent implements OnInit {
 
   SelectBirthVillage(ID:any){
     this.VillageArray = this.AreaArray.filter(
-      (value)=>{
+      (value) => {
         return Number.parseInt(value.AreaID) === Number.parseInt(ID);
       }
     );
@@ -92,7 +92,7 @@ export class BirthDataComponent implements OnInit {
 
   SelectLivingVillage(ID:any){
     this.VillageArray = this.AreaArray.filter(
-      (value)=>{
+      (value) => {
         return Number.parseInt(value.AreaID) === Number.parseInt(ID);
       }
     );
