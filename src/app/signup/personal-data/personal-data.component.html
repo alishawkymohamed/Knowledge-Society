@@ -53,7 +53,10 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div
+        class="row"
+        [hidden]="password"
+    >
         <div class="col-sm-6">
             <div class="form-group control-group">
                 <label for="password">كلمة السر</label>
@@ -62,7 +65,6 @@
                     class="form-control"
                     id="password"
                     name="password"
-                    [(ngModel)]="password"
                     formControlName="password"
                 >
             </div>
@@ -81,7 +83,6 @@
                     class="form-control"
                     id="confirmPassword"
                     name="confirmPassword"
-                    [(ngModel)]="confirmPassword"
                     formControlName="confirmPassword"
                 >
             </div>
@@ -202,6 +203,7 @@
                     حفظ وإستمرار
                 </label>
                 <input
+                    [disabled]="!personalDataForm.valid"
                     class="btn-success form-control"
                     type="submit"
                     value="حفظ وإستمرار"

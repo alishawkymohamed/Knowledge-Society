@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
-// tslint:disable-next-line:import-blacklist
 import 'rxjs/Rx';
 import { Response } from '@angular/http';
 

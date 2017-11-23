@@ -17,6 +17,7 @@ import { ExtraDataComponent } from './signup/extra-data/extra-data.component';
 import { AppRoutingModule } from "./app-routing.module";
 import { UserDataService } from "./shared/user-data.service";
 import { ApiService } from "./shared/api.service";
+import { RegisterService } from "./shared/register.service";
 
 
 export class CustomOption extends ToastOptions {
@@ -51,7 +52,8 @@ export class CustomOption extends ToastOptions {
     LoginService,
     UserDataService,
     { provide: ToastOptions, useClass: CustomOption },
-    ApiService
+    ApiService,
+    RegisterService
 
   ],
   bootstrap: [AppComponent]
