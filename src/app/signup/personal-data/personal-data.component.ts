@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core'
-import { FormGroup, FormControl, Validators } from '@angular/forms'
-import { UserDataService } from '../../shared/user-data.service'
-import { PasswordValidation } from './PasswordValidation.ValidationExtension';
-import { ApiService } from '../../shared/api.service';
-import { Observable } from 'rxjs/Observable';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core' ;
+import { FormGroup, FormControl, Validators } from '@angular/forms' ;
+import { UserDataService } from '../../shared/user-data.service' ;
+import { PasswordValidation } from './PasswordValidation.ValidationExtension' ;
+import { ApiService } from '../../shared/api.service' ;
+import { Observable } from 'rxjs/Observable' ;
 
 @Component({
   selector: 'app-personal-data',

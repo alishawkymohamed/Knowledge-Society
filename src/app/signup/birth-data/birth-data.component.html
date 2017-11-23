@@ -1,39 +1,58 @@
 <form>
     <div class="row">
+        <ngx-loading
+        [show]="loading"
+        [config]="{ backdropBorderRadius: '14px' }"
+        ></ngx-loading>
         <div class="col-12">
             <h5>محل الميلاد</h5>
         </div>
         <div class="col-sm-4">
             <div class="form-group control-group">
                 <label for="bornCity">المحافظة</label>
-                <input
+                <!-- <input
                     type="text"
                     class="selectrs form-control"
                     id="bornCity"
                     name="bornCity"
-                >
+                > -->
+                <br>
+                <select (change)="SelectBirthGoverment($event.target.value)">
+                  <option value="0">--اختر المحافظة--</option>
+                  <option *ngFor="let GOV of GovernrateArray" value="{{GOV.ID}}" [innerText]="GOV.Name"></option>
+                </select>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="form-group control-group">
                 <label for="bornDistrict">المركز / الحي</label>
-                <input
+                <!-- <input
                     type="text"
                     class="selectrs form-control"
                     id="bornDistrict"
                     name="bornDistrict"
-                >
+                > -->
+                <br>
+                <select (change)="SelectBirthVillage($event.target.value)">
+                  <option value="0">--اختر المركز/الحي--</option>
+                  <option *ngFor="let A of SelectedArias" value="{{A.ID}}" [innerText]="A.Name"></option>
+                </select>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="form-group control-group">
                 <label for="bornVillage">القرية</label>
-                <input
+                <!-- <input
                     type="text"
                     class="selectrs form-control"
                     id="bornVillage"
                     name="bornVillage"
-                >
+                > -->
+                <br>
+                <select id="bornVillage" name="bornVillage">
+                  <option value="0">--اختر القرية--</option>
+                  <option *ngFor="let A of LivingVillageArray" value="{{A.ID}}" [innerText]="A.Name"></option>
+                </select>
             </div>
         </div>
     </div>
@@ -45,34 +64,49 @@
         <div class="col-sm-4">
             <div class="form-group control-group">
                 <label for="liveCity">المحافظة</label>
-                <input
+                <!-- <input
                     type="text"
                     class="selectrs form-control"
                     id="liveCity"
                     name="liveCity"
-                >
+                > -->
+                <br>
+                <select (change)="SelectLivingGoverment($event.target.value)">
+                  <option value="0">--اختر المحافظة--</option>
+                  <option *ngFor="let GOV of GovernrateArray" value="{{GOV.ID}}" [innerText]="GOV.Name"></option>
+                </select>
             </div>
         </div>
         <div class="col-sm-4">
             <div class="form-group control-group">
                 <label for="liveDistrict">المركز / الحي</label>
-                <input
+                <!-- <input
                     type="text"
                     class="selectrs form-control"
                     id="liveDistrict"
                     name="liveDistrict"
-                >
-            </div>
+                > -->
+                <br>
+                <select (change)="SelectLivingVillage($event.target.value)">
+                  <option value="0">--اختر المركز/الحي--</option>
+                  <option *ngFor="let A of LivingAreaArray" value="{{A.ID}}" [innerText]="A.Name"></option>
+                </select>
+              </div>
         </div>
         <div class="col-sm-4">
             <div class="form-group control-group">
                 <label for="liveVillage">القرية</label>
-                <input
+                <!-- <input
                     type="text"
                     class="selectrs form-control"
                     id="liveVillage"
                     name="liveVillage"
-                >
+                > -->
+                <br>
+                <select>
+                  <option value="0">--اختر القرية--</option>
+                  <option *ngFor="let A of LivingVillageArray" value="{{A.ID}}" [innerText]="A.Name"></option>
+                </select>
             </div>
         </div>
     </div>

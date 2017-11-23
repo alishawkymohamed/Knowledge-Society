@@ -1,3 +1,4 @@
+import { BirthDataService } from './shared/birth-data.service';
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -51,7 +52,8 @@ export class CustomOption extends ToastOptions {
     LoginService,
     UserDataService,
     { provide: ToastOptions, useClass: CustomOption },
-    ApiService
+    ApiService,
+    BirthDataService
 
   ],
   bootstrap: [AppComponent]
