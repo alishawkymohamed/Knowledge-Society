@@ -35,60 +35,54 @@ export class BirthDataComponent implements OnInit {
   User: any = {};
 
   constructor(private ApiService: ApiService, private BirthData: BirthDataService, private UserDataService: UserDataService, private router: Router, private RegisterService: RegisterService, public toastr: ToastsManager, vcr: ViewContainerRef) {
-    debugger;
-    if (BirthData.GetData() == null) {
-      ApiService.ServerRequest('/GeneralData/GetBirthData', 'GET', null).subscribe(
-        (data) => {
-          BirthData.SetData(data);
-          const Sdata = BirthData.GetData();
-          this.GovernrateArray = Sdata.Governrates;
-          this.AreaArray = Sdata.Areas;
-          this.VillageArray = Sdata.Villages;
-          this.loading = false;
-          if (UserDataService.getUserData() == null) {
-            router.navigateByUrl('/account/signup/personaldata');
-          }
-          else {
-            this.User = UserDataService.getUserData();
-            this.BirthGovernment = this.User.POBGovernateID;
-            this.SelectBirthGoverment(this.User.POBGovernateID);
-            this.BirthArea = this.User.POBAreaID;
-            this.SelectBirthVillage(this.User.POBAreaID);
-            this.BirthVillage = this.User.POBVillageID;
-            this.livingGovernment = this.User.AddressGovernateID;
-            this.SelectLivingGoverment(this.User.AddressGovernateID);
-            this.livingArea = this.User.AddressAreaID;
-            this.SelectLivingVillage(this.User.AddressAreaID);
-            this.livingVillage = this.User.AddressVillageID;
-          }
-
-        }
-      )
-    }
-    else {
-      const Sdata = BirthData.GetData();
-      this.GovernrateArray = Sdata.Governrates;
-      this.AreaArray = Sdata.Areas;
-      this.VillageArray = Sdata.Villages;
-      this.loading = false;
-      this.loading = false
-    }
+    this.toastr.setRootViewContainerRef(vcr);
     if (UserDataService.getUserData() == null) {
-      router.navigateByUrl('/account/signup/personaldata');
+      this.toastr.info("من فضلك أدخل البيانات الاساسيه أولا !!", 'تنبيه!');
+      setTimeout(() => {
+        this.loading = true;
+        router.navigateByUrl('/account/signup/personaldata');
+      }, 3000);
     }
     else {
-      this.User = UserDataService.getUserData();
-      this.BirthGovernment = this.User.POBGovernateID;
-      this.SelectBirthGoverment(this.User.POBGovernateID);
-      this.BirthArea = this.User.POBAreaID;
-      this.SelectBirthVillage(this.User.POBAreaID);
-      this.BirthVillage = this.User.POBVillageID;
-      this.livingGovernment = this.User.AddressGovernateID;
-      this.SelectLivingGoverment(this.User.AddressGovernateID);
-      this.livingArea = this.User.AddressAreaID;
-      this.SelectLivingVillage(this.User.AddressAreaID);
-      this.livingVillage = this.User.AddressVillageID;
+      if (BirthData.GetData() == null) {
+        ApiService.ServerRequest('/GeneralData/GetBirthData', 'GET', null).subscribe(
+          (data) => {
+            BirthData.SetData(data);
+            const Sdata = BirthData.GetData();
+            this.GovernrateArray = Sdata.Governrates;
+            this.AreaArray = Sdata.Areas;
+            this.VillageArray = Sdata.Villages;
+            this.loading = false;
+            if (UserDataService.getUserData() == null) {
+              this.loading = false;
+            }
+            else {
+              this.User = UserDataService.getUserData();
+              this.BirthGovernment = this.User.POBGovernateID;
+              this.SelectBirthGoverment(this.User.POBGovernateID);
+              this.BirthArea = this.User.POBAreaID;
+              this.SelectBirthVillage(this.User.POBAreaID);
+              this.BirthVillage = this.User.POBVillageID;
+              this.livingGovernment = this.User.AddressGovernateID;
+              this.SelectLivingGoverment(this.User.AddressGovernateID);
+              this.livingArea = this.User.AddressAreaID;
+              this.SelectLivingVillage(this.User.AddressAreaID);
+              this.livingVillage = this.User.AddressVillageID;
+            }
+          }
+        )
+      }
+      else {
+        const Sdata = BirthData.GetData();
+        this.GovernrateArray = Sdata.Governrates;
+        this.AreaArray = Sdata.Areas;
+        this.VillageArray = Sdata.Villages;
+        this.loading = false;
+        this.loading = false
+      }
+
     }
+
 
   }
   ngOnInit() {
@@ -137,7 +131,6 @@ export class BirthDataComponent implements OnInit {
     this.User.AddressVillageID = this.livingVillage == 0 ? null : this.livingVillage;
     this.RegisterService.SendRegisterData({ TabName: 'Birth Data', PersonalData: this.User }).subscribe(
       (Response) => {
-        debugger;
         if (Response != false) {
           this.toastr.success("تم تسجيل البيانات بنجاح ..");
           this.router.navigate(['/account', 'signup', 'workdata'])

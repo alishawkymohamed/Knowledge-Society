@@ -1,212 +1,15 @@
-<form>
+<div>
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
     <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-4" *ngFor="let Qual of Qualifications;let i = index">
             <div class="form-group control-group">
-                <label for="four1">اللغة الانجليزية</label>
-                <select
-                    class="form-control"
-                    id="four1"
-                    name="four1"
-                >
-                    <option
-                        value
-                        disabled
-                        selected
-                    >
-                        .
+                <label for="four1" id="{{Qual.ID}}">{{Qual.Name}}</label>
+                <select class="form-control" id="four1" name="{{Qual.ID}}" (change)="ONSubmit(Qual.ID,$event.target.value)" [value]="PersonGrades[i]">
+                    <option value="0" disabled selected>
+                        -- اختر المستوي --
                     </option>
-                    <option value="o1">ممتاز</option>
-                    <option value="o2">جيد</option>
-                    <option value="o3">رديء</option>
-                </select>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="form-group control-group">
-                <label for="four2">العمل التطوعي</label>
-                <select
-                    class="form-control"
-                    id="four2"
-                    name="four2"
-                >
-                    <option
-                        value
-                        disabled
-                        selected
-                    >
-                        .
-                    </option>
-                    <option value="o1">ممتاز</option>
-                    <option value="o2">جيد</option>
-                    <option value="o3">رديء</option>
-                </select>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="form-group control-group">
-                <label for="four3">الانترنت</label>
-                <select
-                    class="form-control"
-                    id="four3"
-                    name="four3"
-                >
-                    <option
-                        value
-                        disabled
-                        selected
-                    >
-                        .
-                    </option>
-                    <option value="o1">ممتاز</option>
-                    <option value="o2">جيد</option>
-                    <option value="o3">رديء</option>
-                </select>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="form-group control-group">
-                <label for="four4">التدريب</label>
-                <select
-                    class="form-control"
-                    id="four4"
-                    name="four4"
-                >
-                    <option
-                        value
-                        disabled
-                        selected
-                    >
-                        .
-                    </option>
-                    <option value="o1">ممتاز</option>
-                    <option value="o2">جيد</option>
-                    <option value="o3">رديء</option>
-                </select>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="form-group control-group">
-                <label for="four5">الترجمة</label>
-                <select
-                    class="form-control"
-                    id="four5"
-                    name="four5"
-                >
-                    <option
-                        value
-                        disabled
-                        selected
-                    >
-                        .
-                    </option>
-                    <option value="o1">ممتاز</option>
-                    <option value="o2">جيد</option>
-                    <option value="o3">رديء</option>
-                </select>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="form-group control-group">
-                <label for="four6">البرمجة</label>
-                <select
-                    class="form-control"
-                    id="four6"
-                    name="four6"
-                >
-                    <option
-                        value
-                        disabled
-                        selected
-                    >
-                        .
-                    </option>
-                    <option value="o1">ممتاز</option>
-                    <option value="o2">جيد</option>
-                    <option value="o3">رديء</option>
-                </select>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="form-group control-group">
-                <label for="four7">التصوير</label>
-                <select
-                    class="form-control"
-                    id="four7"
-                    name="four7"
-                >
-                    <option
-                        value
-                        disabled
-                        selected
-                    >
-                        .
-                    </option>
-                    <option value="o1">ممتاز</option>
-                    <option value="o2">جيد</option>
-                    <option value="o3">رديء</option>
-                </select>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="form-group control-group">
-                <label for="four8">الكتابة</label>
-                <select
-                    class="form-control"
-                    id="four8"
-                    name="four8"
-                >
-                    <option
-                        value
-                        disabled
-                        selected
-                    >
-                        .
-                    </option>
-                    <option value="o1">ممتاز</option>
-                    <option value="o2">جيد</option>
-                    <option value="o3">رديء</option>
-                </select>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="form-group control-group">
-                <label for="four9">البحث</label>
-                <select
-                    class="form-control"
-                    id="four9"
-                    name="four9"
-                >
-                    <option
-                        value
-                        disabled
-                        selected
-                    >
-                        .
-                    </option>
-                    <option value="o1">ممتاز</option>
-                    <option value="o2">جيد</option>
-                    <option value="o3">رديء</option>
-                </select>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="form-group control-group">
-                <label for="four10">القدرة على الإبداع</label>
-                <select
-                    class="form-control"
-                    id="four10"
-                    name="four10"
-                >
-                    <option
-                        value
-                        disabled
-                        selected
-                    >
-                        .
-                    </option>
-                    <option value="o1">ممتاز</option>
-                    <option value="o2">جيد</option>
-                    <option value="o3">رديء</option>
+                    <option *ngFor="let level of QualificationLevels;let i = index" value="{{level.ID}}" [innerText]="level.Name"></option>
+
                 </select>
             </div>
         </div>
@@ -214,35 +17,21 @@
     <div class="pager wizard row justify-content-center">
         <li class="col-lg-2 col-md-3 col-sm-4 next">
             <div class="form-group">
-                <label
-                    for
-                    style="opacity:0"
-                >
+                <label for style="opacity:0">
                     حفظ وإستمرار
                 </label>
-                <input
-                    class="btn-success form-control"
-                    type="submit"
-                    value="حفظ وإستمرار"
-                >
+                <input class="btn-success form-control" type="submit" value="حفظ وإستمرار" (click)="SaveData()">
             </div>
         </li>
         <li class="col-lg-2 col-md-3 col-sm-4 previous disabled">
             <div class="form-group">
-                <label
-                    for
-                    style="opacity:0"
-                >
+                <label for style="opacity:0">
                     العودة
                 </label>
                 <a href="#">
-                    <input
-                        class="btn-success form-control"
-                        type="button"
-                        value="العودة"
-                    >
+                    <input class="btn-success form-control" type="button" value="العودة">
                 </a>
             </div>
         </li>
     </div>
-</form>
+</div>

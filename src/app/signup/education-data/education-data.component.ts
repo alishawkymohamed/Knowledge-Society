@@ -38,8 +38,13 @@ export class EducationDataComponent implements OnInit {
   public BusinessSector: BusinessSector[] = [];
 
   constructor(private ApiService: ApiService, private UserDataService: UserDataService, private router: Router, private RegisterService: RegisterService, public toastr: ToastsManager, vcr: ViewContainerRef, EducationData: EducationDataService) {
+    this.toastr.setRootViewContainerRef(vcr);
     if (UserDataService.getUserData() == null) {
-      router.navigateByUrl('/account/signup/personaldata');
+      this.toastr.info("من فضلك أدخل البيانات الاساسيه أولا !!", 'تنبيه!');
+      setTimeout(() => {
+        this.loading = true;
+        router.navigateByUrl('/account/signup/personaldata');
+      }, 3000);
     } else {
       this.User = UserDataService.getUserData();
       if (EducationData.GetData() == null) {
@@ -70,11 +75,6 @@ export class EducationDataComponent implements OnInit {
         this.University = Sdata.University;
         this.loading = false;
       }
-    }
-
-
-    if (UserDataService.getUserData() == null) {
-      router.navigateByUrl('/account/signup/personaldata');
     }
   }
 
@@ -114,7 +114,7 @@ export class EducationDataComponent implements OnInit {
     console.log(this.User);
     this.RegisterService.SendRegisterData({ TabName: 'Education Data', PersonalData: this.User }).subscribe(
       (Response) => {
-        debugger;
+
         if (Response != false) {
           this.toastr.success("تم تسجيل البيانات بنجاح ..");
           this.router.navigate(['/account', 'signup', 'extradata'])
