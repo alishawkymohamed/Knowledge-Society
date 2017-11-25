@@ -99,7 +99,7 @@ export class PersonalDataComponent implements OnInit {
           if (Response != false) {
             this.loading = false;
             this.toastr.success("تم تسجيل البيانات بنجاح ..");
-            this.router.navigate(['/account', 'signup', 'birthdaydata'])
+            this.router.navigate(['/account', 'signup', 'birthdaydata']);
           }
           else {
             this.loading = false;
