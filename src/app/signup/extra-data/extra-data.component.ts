@@ -110,8 +110,12 @@ export class ExtraDataComponent {
           this.toastr.success("تم تسجيل البيانات بنجاح ..");
           this.PersonQualifications = Response.PersonQualifications;
           this.ExtraDataService.SetPersonQualifications(Response.PersonQualifications);
+          this.UserDataService.setUserData(Response);
+          this.User = this.UserDataService.getUserData();
           this.loading = false;
-          this.router.navigate(['/account', 'signup', 'personaldata']);
+          setTimeout(() => {
+            this.router.navigate(['/account', 'signup', 'personaldata']);
+          }, 1500);
         }
         else {
           this.loading = false;

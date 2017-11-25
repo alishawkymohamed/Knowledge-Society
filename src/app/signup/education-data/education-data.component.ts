@@ -86,6 +86,7 @@ export class EducationDataComponent implements OnInit {
   }
   RemoveLastEducation() {
     this.PersonEducation.pop();
+    console.log(this.PersonEducation);
   }
   AddTraining() {
     let p = new PersonTraining();
@@ -95,6 +96,7 @@ export class EducationDataComponent implements OnInit {
 
   RemoveLastTraining() {
     this.PersonTraining.pop();
+    console.log(this.PersonTraining);
   }
 
   AddExperience() {
@@ -116,7 +118,11 @@ export class EducationDataComponent implements OnInit {
         if (Response != false) {
           this.toastr.success("تم تسجيل البيانات بنجاح ..");
           this.loading = false;
-          this.router.navigate(['/account', 'signup', 'extradata']);
+          this.UserDataService.setUserData(Response);
+          this.User = this.UserDataService.getUserData();
+          setTimeout(() => {
+            this.router.navigate(['/account', 'signup', 'extradata']);
+          }, 1500);
         }
         else {
           this.loading = false;

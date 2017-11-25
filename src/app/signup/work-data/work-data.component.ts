@@ -207,6 +207,7 @@ export class WorkDataComponent {
       (data) => {
         if (data != false) {
           this.UserDataService.setUserData(data);
+          this.User = this.UserDataService.getUserData();
           this.loading = false;
           this.toastr.success("تم تسجيل البيانات بنجاح ..");
           setTimeout(() => {

@@ -44,6 +44,7 @@ export class BirthDataComponent implements OnInit {
       }, 3000);
     }
     else {
+      this.User = this.UserDataService.getUserData();
       if (BirthData.GetData() == null) {
         ApiService.ServerRequest('/GeneralData/GetBirthData', 'GET', null).subscribe(
           (data) => {
@@ -77,8 +78,17 @@ export class BirthDataComponent implements OnInit {
         this.GovernrateArray = Sdata.Governrates;
         this.AreaArray = Sdata.Areas;
         this.VillageArray = Sdata.Villages;
+        this.BirthGovernment = this.User.POBGovernateID == null ? 0 : this.User.POBGovernateID;
+        this.SelectBirthGoverment(this.User.POBGovernateID);
+        this.BirthArea = this.User.POBAreaID == null ? 0 : this.User.POBAreaID;
+        this.SelectBirthVillage(this.User.POBAreaID);
+        this.BirthVillage = this.User.POBVillageID == null ? 0 : this.User.POBVillageID;
+        this.livingGovernment = this.User.AddressGovernateID == null ? 0 : this.User.AddressGovernateID;
+        this.SelectLivingGoverment(this.User.AddressGovernateID);
+        this.livingArea = this.User.AddressAreaID == null ? 0 : this.User.AddressAreaID;
+        this.SelectLivingVillage(this.User.AddressAreaID);
+        this.livingVillage = this.User.AddressVillageID == null ? 0 : this.User.AddressVillageID;
         this.loading = false;
-        this.loading = false
       }
 
     }
@@ -134,8 +144,22 @@ export class BirthDataComponent implements OnInit {
       (Response) => {
         if (Response != false) {
           this.loading = false;
+          this.UserDataService.setUserData(Response);
+          this.User = this.UserDataService.getUserData();
+          this.BirthGovernment = this.User.POBGovernateID == null ? 0 : this.User.POBGovernateID;
+          this.SelectBirthGoverment(this.User.POBGovernateID);
+          this.BirthArea = this.User.POBAreaID == null ? 0 : this.User.POBAreaID;
+          this.SelectBirthVillage(this.User.POBAreaID);
+          this.BirthVillage = this.User.POBVillageID == null ? 0 : this.User.POBVillageID;
+          this.livingGovernment = this.User.AddressGovernateID == null ? 0 : this.User.AddressGovernateID;
+          this.SelectLivingGoverment(this.User.AddressGovernateID);
+          this.livingArea = this.User.AddressAreaID == null ? 0 : this.User.AddressAreaID;
+          this.SelectLivingVillage(this.User.AddressAreaID);
+          this.livingVillage = this.User.AddressVillageID == null ? 0 : this.User.AddressVillageID;
           this.toastr.success("تم تسجيل البيانات بنجاح ..");
-          this.router.navigate(['/account', 'signup', 'workdata'])
+          setTimeout(() => {
+            this.router.navigate(['/account', 'signup', 'workdata']);
+          }, 1500);
         }
         else {
           this.loading = false;
