@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewEncapsulation, ViewContainerRef } from '@angular/core'
-import { FormGroup, FormControl, Validators } from '@angular/forms'
-import { UserDataService } from '../../shared/user-data.service'
+import { Component, OnInit, ViewEncapsulation, ViewContainerRef } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { UserDataService } from '../../shared/user-data.service';
 import { PasswordValidation } from './PasswordValidation.ValidationExtension';
 import { ApiService } from '../../shared/api.service';
 import { Observable } from 'rxjs/Observable';

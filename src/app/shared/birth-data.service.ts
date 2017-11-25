@@ -13,10 +13,15 @@ export class BirthDataService {
     this.Villages = data.Villages;
   }
   public GetData() {
-    return {
-      'Governrates': this.Governrates,
-      'Areas': this.Areas,
-      'Villages': this.Governrates
-    };
+    if (this.Governrates.length != 0) {
+      return {
+        'Governrates': this.Governrates,
+        'Areas': this.Areas,
+        'Villages': this.Governrates
+      };
+    } else {
+      return null;
+    }
   }
+
 }
