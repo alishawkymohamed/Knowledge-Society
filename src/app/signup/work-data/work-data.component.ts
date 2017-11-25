@@ -112,7 +112,6 @@ export class WorkDataComponent {
 
   LoadUserData() {
     if (this.UserDataService.getUserData() != null) {
-      debugger;
       this.User = this.UserDataService.getUserData();
       this.WorkGovernmentID = this.User.PersonWorkData.GovernateID == null ? 0 : this.User.PersonWorkData.GovernateID;
       if (this.WorkGovernmentID != null) {
