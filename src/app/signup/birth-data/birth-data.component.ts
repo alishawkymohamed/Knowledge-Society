@@ -123,6 +123,7 @@ export class BirthDataComponent implements OnInit {
     );
   }
   OnSubmit() {
+    this.loading = true;
     this.User.POBGovernateID = this.BirthGovernment == 0 ? null : this.BirthGovernment;
     this.User.POBAreaID = this.BirthArea == 0 ? null : this.BirthArea;
     this.User.POBVillageID = this.BirthVillage == 0 ? null : this.BirthVillage;
@@ -132,19 +133,24 @@ export class BirthDataComponent implements OnInit {
     this.RegisterService.SendRegisterData({ TabName: 'Birth Data', PersonalData: this.User }).subscribe(
       (Response) => {
         if (Response != false) {
+          this.loading = false;
           this.toastr.success("تم تسجيل البيانات بنجاح ..");
           this.router.navigate(['/account', 'signup', 'workdata'])
         }
         else {
+          this.loading = false;
           this.toastr.error("لقد حدث خطأ ما .. من فضلك أعد المحاولة لاحقاً !!", 'خطأ!');
         }
       },
       (error) => {
+        this.loading = false;
         this.toastr.error(error, 'خطأ!');
       }
     )
   }
 
-
+  goBack() {
+    this.router.navigate(['/account', 'signup', 'personaldata']);
+  }
 }
 

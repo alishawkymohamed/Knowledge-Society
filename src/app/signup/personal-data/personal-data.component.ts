@@ -116,4 +116,7 @@ export class PersonalDataComponent implements OnInit {
     }
   }
 
+  goBack() {
+    this.router.navigate(['/account', 'signup', 'extradata']);
+  }
 }

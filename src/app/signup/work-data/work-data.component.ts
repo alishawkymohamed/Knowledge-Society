@@ -220,4 +220,8 @@ export class WorkDataComponent {
       }
     )
   }
+
+  goBack() {
+    this.router.navigate(['/account', 'signup', 'birthdaydata']);
+  }
 }

@@ -11,7 +11,6 @@ export class ExtraDataService {
   constructor() { }
 
   SetData(Data: any) {
-    console.log(Data);
     this.Qualifications = Data.Qualifications;
     this.QualificationLevels = Data.QualificationLevels;
     this.PersonQualifications = Data.PersonQualifications;

@@ -9,8 +9,8 @@ import { UserDataService } from '../shared/user-data.service';
 
 })
 export class SignupComponent {
-
+  user;
   constructor(private UserDataService: UserDataService) {
-
+    this.user = this.UserDataService.getUserData();
   }
 }

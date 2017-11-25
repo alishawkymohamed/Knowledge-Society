@@ -1,14 +1,39 @@
 <div>
-    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+    <ngx-loading
+        [show]="loading"
+        [config]="{ backdropBorderRadius: '14px' }"
+    ></ngx-loading>
     <div class="row">
-        <div class="col-sm-4" *ngFor="let Qual of Qualifications;let i = index">
+        <div
+            class="col-sm-4"
+            *ngFor="let Qual of Qualifications;let i = index"
+        >
             <div class="form-group control-group">
-                <label for="four1" id="{{Qual.ID}}">{{Qual.Name}}</label>
-                <select class="form-control" id="four1" name="{{Qual.ID}}" (change)="ONSubmit(Qual.ID,$event.target.value)" [value]="PersonGrades[i]">
-                    <option value="0" disabled selected>
+                <label
+                    for="four1"
+                    id="{{Qual.ID}}"
+                >
+                    {{Qual.Name}}
+                </label>
+                <select
+                    class="form-control"
+                    id="four1"
+                    name="{{Qual.ID}}"
+                    (change)="ONSubmit(Qual.ID,$event.target.value)"
+                    [value]="PersonGrades[i]"
+                >
+                    <option
+                        value="0"
+                        disabled
+                        selected
+                    >
                         -- اختر المستوي --
                     </option>
-                    <option *ngFor="let level of QualificationLevels;let i = index" value="{{level.ID}}" [innerText]="level.Name"></option>
+                    <option
+                        *ngFor="let level of QualificationLevels;let i = index"
+                        value="{{level.ID}}"
+                        [innerText]="level.Name"
+                    ></option>
 
                 </select>
             </div>
@@ -17,20 +42,34 @@
     <div class="pager wizard row justify-content-center">
         <li class="col-lg-2 col-md-3 col-sm-4 next">
             <div class="form-group">
-                <label for style="opacity:0">
+                <label
+                    for
+                    style="opacity:0"
+                >
                     حفظ وإستمرار
                 </label>
-                <input class="btn-success form-control" type="submit" value="حفظ وإستمرار" (click)="SaveData()">
+                <input
+                    class="btn-success form-control"
+                    type="submit"
+                    value="حفظ وإستمرار"
+                    (click)="SaveData()"
+                >
             </div>
         </li>
         <li class="col-lg-2 col-md-3 col-sm-4 previous disabled">
             <div class="form-group">
-                <label for style="opacity:0">
+                <label
+                    for
+                    style="opacity:0"
+                >
                     العودة
                 </label>
-                <a href="#">
-                    <input class="btn-success form-control" type="button" value="العودة">
-                </a>
+                <input
+                    class="btn-success form-control"
+                    type="button"
+                    value="العودة"
+                    (click)="goBack()"
+                >
             </div>
         </li>
     </div>

@@ -16,7 +16,7 @@ import { forEach } from '@angular/router/src/utils/collection';
   styleUrls: ['./extra-data.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class ExtraDataComponent implements OnInit {
+export class ExtraDataComponent {
   public loading = true;
   public Qualifications: Qualification[] = [];
   public QualificationLevels: QualificationLevel[] = [];
@@ -78,12 +78,7 @@ export class ExtraDataComponent implements OnInit {
           }
         }
       }
-
     }
-  }
-
-  ngOnInit() {
-
   }
 
   ONSubmit(QualificationID: any, QualificationlevelID: any) {
@@ -104,33 +99,33 @@ export class ExtraDataComponent implements OnInit {
         }
         this.PersonQualifications = temparray;
       }
-
-
     }
-    console.log(this.PersonQualifications);
   }
   SaveData() {
-
+    this.loading = true;
     this.User.PersonQualifications = this.PersonQualifications;
-    console.log(this.User);
     this.RegisterService.SendRegisterData({ TabName: 'Extra Data', PersonalData: this.User }).subscribe(
       (Response) => {
         if (Response != false) {
           this.toastr.success("تم تسجيل البيانات بنجاح ..");
           this.PersonQualifications = Response.PersonQualifications;
           this.ExtraDataService.SetPersonQualifications(Response.PersonQualifications);
-          this.router.navigate(['/account', 'signup', 'extradata'])
+          this.loading = false;
+          this.router.navigate(['/account', 'signup', 'personaldata']);
         }
         else {
+          this.loading = false;
           this.toastr.error("لقد حدث خطأ ما .. من فضلك أعد المحاولة لاحقاً !!", 'خطأ!');
         }
       },
       (error) => {
+        this.loading = false;
         this.toastr.error(error, 'خطأ!');
       }
-
     )
-
   }
 
+  goBack() {
+    this.router.navigate(['/account', 'signup', 'educationdata']);
+  }
 }

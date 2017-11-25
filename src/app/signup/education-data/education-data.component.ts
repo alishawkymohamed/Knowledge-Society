@@ -1,4 +1,3 @@
-
 import { University } from './../../Models/University';
 import { Year } from './../../Models/Year';
 import { Component, OnInit, ViewEncapsulation, ViewContainerRef } from '@angular/core';
@@ -108,26 +107,30 @@ export class EducationDataComponent implements OnInit {
   }
 
   OnSubmit() {
+    this.loading = true;
     this.User.PersonEducations = this.PersonEducation;
     this.User.PersonTrainings = this.PersonTraining;
     this.User.PersonExperiences = this.PersonExperience;
-    console.log(this.User);
     this.RegisterService.SendRegisterData({ TabName: 'Education Data', PersonalData: this.User }).subscribe(
       (Response) => {
-
         if (Response != false) {
           this.toastr.success("تم تسجيل البيانات بنجاح ..");
-          this.router.navigate(['/account', 'signup', 'extradata'])
+          this.loading = false;
+          this.router.navigate(['/account', 'signup', 'extradata']);
         }
         else {
+          this.loading = false;
           this.toastr.error("لقد حدث خطأ ما .. من فضلك أعد المحاولة لاحقاً !!", 'خطأ!');
         }
       },
       (error) => {
+        this.loading = false;
         this.toastr.error(error, 'خطأ!');
       }
     )
+  }
 
-
+  goBack() {
+    this.router.navigate(['/account', 'signup', 'workdata']);
   }
 }

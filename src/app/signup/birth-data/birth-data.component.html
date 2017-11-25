@@ -1,5 +1,8 @@
 <div class="row">
-    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+    <ngx-loading
+        [show]="loading"
+        [config]="{ backdropBorderRadius: '14px' }"
+    ></ngx-loading>
     <div class="col-12">
         <h5>محل الميلاد</h5>
     </div>
@@ -13,11 +16,23 @@
                     name="bornCity"
                 > -->
             <br>
-            <select class="form-control" [(ngModel)]="BirthGovernment" (change)="SelectBirthGoverment($event.target.value)">
-                <option value="0" disabled selected>
+            <select
+                class="form-control"
+                [(ngModel)]="BirthGovernment"
+                (change)="SelectBirthGoverment($event.target.value)"
+            >
+                <option
+                    value="0"
+                    disabled
+                    selected
+                >
                     --اختر المحافظة--
                 </option>
-                <option *ngFor="let GOV of GovernrateArray" value="{{GOV.ID}}" [innerText]="GOV.Name"></option>
+                <option
+                    *ngFor="let GOV of GovernrateArray"
+                    value="{{GOV.ID}}"
+                    [innerText]="GOV.Name"
+                ></option>
             </select>
         </div>
     </div>
@@ -31,11 +46,23 @@
                     name="bornDistrict"
                 > -->
             <br>
-            <select class="form-control" [(ngModel)]="BirthArea" (change)="SelectBirthVillage($event.target.value)">
-                <option value="0" disabled selected>
+            <select
+                class="form-control"
+                [(ngModel)]="BirthArea"
+                (change)="SelectBirthVillage($event.target.value)"
+            >
+                <option
+                    value="0"
+                    disabled
+                    selected
+                >
                     --اختر المركز/الحي--
                 </option>
-                <option *ngFor="let A of SelectedArias" value="{{A.ID}}" [innerText]="A.Name"></option>
+                <option
+                    *ngFor="let A of SelectedArias"
+                    value="{{A.ID}}"
+                    [innerText]="A.Name"
+                ></option>
             </select>
         </div>
     </div>
@@ -49,11 +76,22 @@
                     name="bornVillage"
                 > -->
             <br>
-            <select class="form-control" [(ngModel)]="BirthVillage">
-                <option value="0" disabled selected>
+            <select
+                class="form-control"
+                [(ngModel)]="BirthVillage"
+            >
+                <option
+                    value="0"
+                    disabled
+                    selected
+                >
                     --اختر القرية--
                 </option>
-                <option *ngFor="let A of LivingVillageArray" value="{{A.ID}}" [innerText]="A.Name"></option>
+                <option
+                    *ngFor="let A of LivingVillageArray"
+                    value="{{A.ID}}"
+                    [innerText]="A.Name"
+                ></option>
             </select>
         </div>
     </div>
@@ -73,11 +111,23 @@
                     name="liveCity"
                 > -->
             <br>
-            <select class="form-control" [(ngModel)]="livingGovernment" (change)="SelectLivingGoverment($event.target.value)">
-                <option value="0" disabled selected>
+            <select
+                class="form-control"
+                [(ngModel)]="livingGovernment"
+                (change)="SelectLivingGoverment($event.target.value)"
+            >
+                <option
+                    value="0"
+                    disabled
+                    selected
+                >
                     --اختر المحافظة--
                 </option>
-                <option *ngFor="let GOV of GovernrateArray" value="{{GOV.ID}}" [innerText]="GOV.Name"></option>
+                <option
+                    *ngFor="let GOV of GovernrateArray"
+                    value="{{GOV.ID}}"
+                    [innerText]="GOV.Name"
+                ></option>
             </select>
         </div>
     </div>
@@ -91,11 +141,23 @@
                     name="liveDistrict"
                 > -->
             <br>
-            <select class="form-control" [(ngModel)]="livingArea" (change)="SelectLivingVillage($event.target.value)">
-                <option value="0" disabled selected>
+            <select
+                class="form-control"
+                [(ngModel)]="livingArea"
+                (change)="SelectLivingVillage($event.target.value)"
+            >
+                <option
+                    value="0"
+                    disabled
+                    selected
+                >
                     --اختر المركز/الحي--
                 </option>
-                <option *ngFor="let A of LivingAreaArray" value="{{A.ID}}" [innerText]="A.Name"></option>
+                <option
+                    *ngFor="let A of LivingAreaArray"
+                    value="{{A.ID}}"
+                    [innerText]="A.Name"
+                ></option>
             </select>
         </div>
     </div>
@@ -109,11 +171,22 @@
                     name="liveVillage"
                 > -->
             <br>
-            <select [(ngModel)]="livingVillage" class="form-control">
-                <option value="0" disabled selected>
+            <select
+                [(ngModel)]="livingVillage"
+                class="form-control"
+            >
+                <option
+                    value="0"
+                    disabled
+                    selected
+                >
                     --اختر القرية--
                 </option>
-                <option *ngFor="let A of LivingVillageArray" value="{{A.ID}}" [innerText]="A.Name"></option>
+                <option
+                    *ngFor="let A of LivingVillageArray"
+                    value="{{A.ID}}"
+                    [innerText]="A.Name"
+                ></option>
             </select>
         </div>
     </div>
@@ -121,20 +194,34 @@
 <div class="pager wizard row justify-content-center">
     <li class="col-lg-2 col-md-3 col-sm-4 next">
         <div class="form-group">
-            <label for style="opacity:0">
+            <label
+                for
+                style="opacity:0"
+            >
                 حفظ وإستمرار
             </label>
-            <input class="btn-success form-control" type="submit" value="حفظ وإستمرار" (click)="OnSubmit()">
+            <input
+                class="btn-success form-control"
+                type="submit"
+                value="حفظ وإستمرار"
+                (click)="OnSubmit()"
+            >
         </div>
     </li>
     <li class="col-lg-2 col-md-3 col-sm-4 previous disabled">
         <div class="form-group">
-            <label for style="opacity:0">
+            <label
+                for
+                style="opacity:0"
+            >
                 العودة
             </label>
-            <a href="#">
-                <input class="btn-success form-control" type="button" value="العودة">
-            </a>
+            <input
+                class="btn-success form-control"
+                type="button"
+                value="العودة"
+                (click)="goBack()"
+            >
         </div>
     </li>
 </div>
