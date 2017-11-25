@@ -21,6 +21,7 @@ import { ApiService } from "./shared/api.service";
 import { RegisterService } from "./shared/register.service";
 import { EducationDataService } from './shared/education-data.service';
 import { ExtraDataService } from './shared/extra-data.service';
+import { WorkDataService } from './shared/work-data.service';
 
 
 export class CustomOption extends ToastOptions {
@@ -59,7 +60,8 @@ export class CustomOption extends ToastOptions {
     BirthDataService,
     RegisterService,
     EducationDataService,
-    ExtraDataService
+    ExtraDataService,
+    WorkDataService
   ],
   bootstrap: [AppComponent]
 })
