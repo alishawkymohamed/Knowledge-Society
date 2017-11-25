@@ -58,16 +58,16 @@ export class BirthDataComponent implements OnInit {
             }
             else {
               this.User = UserDataService.getUserData();
-              this.BirthGovernment = this.User.POBGovernateID;
+              this.BirthGovernment = this.User.POBGovernateID == null ? 0 : this.User.POBGovernateID;
               this.SelectBirthGoverment(this.User.POBGovernateID);
-              this.BirthArea = this.User.POBAreaID;
+              this.BirthArea = this.User.POBAreaID == null ? 0 : this.User.POBAreaID;
               this.SelectBirthVillage(this.User.POBAreaID);
-              this.BirthVillage = this.User.POBVillageID;
-              this.livingGovernment = this.User.AddressGovernateID;
+              this.BirthVillage = this.User.POBVillageID == null ? 0 : this.User.POBVillageID;
+              this.livingGovernment = this.User.AddressGovernateID == null ? 0 : this.User.AddressGovernateID;
               this.SelectLivingGoverment(this.User.AddressGovernateID);
-              this.livingArea = this.User.AddressAreaID;
+              this.livingArea = this.User.AddressAreaID == null ? 0 : this.User.AddressAreaID;
               this.SelectLivingVillage(this.User.AddressAreaID);
-              this.livingVillage = this.User.AddressVillageID;
+              this.livingVillage = this.User.AddressVillageID == null ? 0 : this.User.AddressVillageID;
             }
           }
         )
