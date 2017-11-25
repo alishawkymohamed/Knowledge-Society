@@ -34,47 +34,47 @@ export class BirthDataComponent implements OnInit {
 
   User: any = {};
 
-  constructor(private ApiService: ApiService,private BirthData : BirthDataService,private UserDataService: UserDataService,private router: Router,private RegisterService: RegisterService,public toastr: ToastsManager, vcr: ViewContainerRef) {
-    if(UserDataService.getUserData() == null){
-     router.navigateByUrl('/account/signup/personaldata');
+  constructor(private ApiService: ApiService, private BirthData: BirthDataService, private UserDataService: UserDataService, private router: Router, private RegisterService: RegisterService, public toastr: ToastsManager, vcr: ViewContainerRef) {
+    if (UserDataService.getUserData() == null) {
+      router.navigateByUrl('/account/signup/personaldata');
     }
-    else{
+    else {
       this.User = UserDataService.getUserData();
-      this.BirthGovernment=this.User.POBGovernateID ;
+      this.BirthGovernment = this.User.POBGovernateID;
       this.BirthArea = this.User.POBAreaID;
-      this.BirthVillage=this.User.POBVillageID;
+      this.BirthVillage = this.User.POBVillageID;
       this.livingGovernment = this.User.AddressGovernateID;
       this.livingArea = this.User.AddressAreaID;
       this.livingVillage = this.User.AddressVillageID;
     }
-    if(BirthData.GetData().Governrates.length == 0){
-    ApiService.ServerRequest('/GeneralData/GetBirthData','GET',null).subscribe(
-      (data) => {
-        BirthData.SetData(data);
-        const Sdata = BirthData.GetData();
-        this.GovernrateArray = Sdata.Governrates;
-        this.AreaArray = Sdata.Areas;
-        this.VillageArray = Sdata.Villages;
-        this.loading = false;
-      }
-    )
-  }
-  else{
-    this.loading = false
+    if (BirthData.GetData().Governrates.length == 0) {
+      ApiService.ServerRequest('/GeneralData/GetBirthData', 'GET', null).subscribe(
+        (data) => {
+          BirthData.SetData(data);
+          const Sdata = BirthData.GetData();
+          this.GovernrateArray = Sdata.Governrates;
+          this.AreaArray = Sdata.Areas;
+          this.VillageArray = Sdata.Villages;
+          this.loading = false;
+        }
+      )
     }
-   }
+    else {
+      this.loading = false
+    }
+  }
 
   ngOnInit() {
 
   }
-  SelectBirthGoverment(ID: any){
+  SelectBirthGoverment(ID: any) {
     this.SelectedArias = this.AreaArray.filter(
       (value) => {
         return Number.parseInt(value.GovernateID) === Number.parseInt(ID);
       }
     );
   }
-  SelectLivingGoverment(ID: any){
+  SelectLivingGoverment(ID: any) {
     this.LivingAreaArray = this.AreaArray.filter(
       (value) => {
         return Number.parseInt(value.GovernateID) === Number.parseInt(ID);
@@ -82,7 +82,7 @@ export class BirthDataComponent implements OnInit {
     );
   }
 
-  SelectBirthVillage(ID:any){
+  SelectBirthVillage(ID: any) {
     this.VillageArray = this.AreaArray.filter(
       (value) => {
         return Number.parseInt(value.AreaID) === Number.parseInt(ID);
@@ -90,20 +90,20 @@ export class BirthDataComponent implements OnInit {
     );
   }
 
-  SelectLivingVillage(ID:any){
+  SelectLivingVillage(ID: any) {
     this.VillageArray = this.AreaArray.filter(
       (value) => {
         return Number.parseInt(value.AreaID) === Number.parseInt(ID);
       }
     );
   }
-  OnSubmit(){
-    this.User.POBGovernateID = this.BirthGovernment==0?null:this.BirthGovernment;
-    this.User.POBAreaID = this.BirthArea==0?null:this.BirthArea;
-    this.User.POBVillageID = this.BirthVillage==0?null:this.BirthVillage;
-    this.User.AddressGovernateID = this.livingGovernment==0?null:this.livingGovernment;
-    this.User.AddressAreaID = this.livingArea==0?null:this.livingArea;
-    this.User.AddressVillageID = this.livingVillage==0?null:this.livingVillage;
+  OnSubmit() {
+    this.User.POBGovernateID = this.BirthGovernment == 0 ? null : this.BirthGovernment;
+    this.User.POBAreaID = this.BirthArea == 0 ? null : this.BirthArea;
+    this.User.POBVillageID = this.BirthVillage == 0 ? null : this.BirthVillage;
+    this.User.AddressGovernateID = this.livingGovernment == 0 ? null : this.livingGovernment;
+    this.User.AddressAreaID = this.livingArea == 0 ? null : this.livingArea;
+    this.User.AddressVillageID = this.livingVillage == 0 ? null : this.livingVillage;
     this.RegisterService.SendRegisterData({ TabName: "Birth Data", PersonalData: this.User }).subscribe(
       (Response) => {
         if (Response != false) {
@@ -121,5 +121,5 @@ export class BirthDataComponent implements OnInit {
   }
 
 
-  }
+}
 

@@ -6,67 +6,24 @@
     <div class="col-12">
         <h5>الحالة العملية</h5>
     </div>
-    <div class="col-md-3 col-sm-6">
+    <div
+        class="col-md-3 col-sm-6"
+        *ngFor="let s of WorkStatus;let i = index"
+    >
         <div class="radio radio-success">
             <input
                 type="radio"
                 name="workOptions"
-                id="std-notw"
-                value="option1"
+                [id]="s.ID"
+                [value]="s.ID"
+                (change)="SelectWorkStatus($event.target.value)"
+                [checked]="s.ID == WorkStatusID"
             >
             <label
                 class="work-tab"
-                for="std-notw"
+                [for]="s.ID"
             >
-                طالب ولا يعمل
-            </label>
-        </div>
-    </div>
-    <div class="col-md-3 col-sm-6">
-        <div class="radio radio-success">
-            <input
-                type="radio"
-                name="workOptions"
-                id="notw"
-                value="option2"
-            >
-            <label
-                class="work-tab"
-                for="notw"
-            >
-                لا يعمل
-            </label>
-        </div>
-    </div>
-    <div class="col-md-3 col-sm-6">
-        <div class="radio radio-success">
-            <input
-                type="radio"
-                name="workOptions"
-                id="std-work"
-                value="option3"
-            >
-            <label
-                class="work-tab"
-                for="std-work"
-            >
-                طالب و يعمل
-            </label>
-        </div>
-    </div>
-    <div class="col-md-3 col-sm-6">
-        <div class="radio radio-success">
-            <input
-                type="radio"
-                name="workOptions"
-                id="work"
-                value="option4"
-            >
-            <label
-                class="work-tab"
-                for="work"
-            >
-                يعمل
+                {{s.Name}}
             </label>
         </div>
     </div>
@@ -81,8 +38,15 @@
             <select
                 (change)="SelectWorkGoverment($event.target.value)"
                 class="form-control"
+                [(ngModel)]="WorkGovernmentID"
             >
-                <option value="0">--اختر المحافظة--</option>
+                <option
+                    value="0"
+                    disabled
+                    [selected]="WorkGovernmentID == 0"
+                >
+                    -- اختر المحافظة --
+                </option>
                 <option
                     *ngFor="let GOV of GovernrateArray"
                     value="{{GOV.ID}}"
@@ -95,10 +59,17 @@
         <div class="form-group control-group">
             <label for="workDistrict">المركز / الحي</label>
             <select
-                (change)="SelectWorkVillage($event.target.value)"
+                (change)="SelectWorkArea($event.target.value)"
                 class="form-control"
+                [(ngModel)]="WorkAreaID"
             >
-                <option value="0">--اختر المركز/الحي--</option>
+                <option
+                    value="0"
+                    disabled
+                    [selected]="WorkAreaID == 0"
+                >
+                    -- اختر المركز/الحي --
+                </option>
                 <option
                     *ngFor="let A of SelectedArias"
                     value="{{A.ID}}"
@@ -110,10 +81,20 @@
     <div class="col-sm-4">
         <div class="form-group control-group">
             <label for="workVillage">القرية</label>
-            <select class="form-control">
-                <option value="0">--اختر القرية--</option>
+            <select
+                class="form-control"
+                (change)="SelectWorkVillage($event.target.value)"
+                [(ngModel)]="WorkVillageID"
+            >
                 <option
-                    *ngFor="let A of VillageArray"
+                    value="0"
+                    disabled
+                    [selected]="WorkVillageID == 0"
+                >
+                    -- اختر القرية --
+                </option>
+                <option
+                    *ngFor="let A of selectedVillages"
                     value="{{A.ID}}"
                     [innerText]="A.Name"
                 ></option>
@@ -125,23 +106,35 @@
     <div class="col-sm-4">
         <div class="form-group control-group">
             <label for="workType">نوعية العمل</label>
-            <input
-                type="text"
-                class="selectrs form-control"
-                id="workType"
-                name="workType"
+            <select
+                (change)="SelectWorkType($event.target.value)"
+                class="form-control"
             >
+                <option value="0">-- اختر نوعية العمل --</option>
+                <option
+                    *ngFor="let A of WorkTypes"
+                    value="{{A.ID}}"
+                    [innerText]="A.Name"
+                    [selected]="A.ID == WorkTypeID"
+                ></option>
+            </select>
         </div>
     </div>
     <div class="col-sm-4">
         <div class="form-group control-group">
             <label for="workHave">ملكية الجهة</label>
-            <input
-                type="text"
-                class="selectrs form-control"
-                id="workHave"
-                name="workHave"
+            <select
+                (change)="SelectWorkEquity($event.target.value)"
+                class="form-control"
             >
+                <option value="0">-- اختر ملكية الجهة --</option>
+                <option
+                    *ngFor="let A of WorkEquaties"
+                    value="{{A.ID}}"
+                    [innerText]="A.Name"
+                    [selected]="A.ID == WorkEquityID"
+                ></option>
+            </select>
         </div>
     </div>
     <div class="col-sm-4 givemarg">
@@ -152,7 +145,9 @@
                         type="radio"
                         name="nowOptions"
                         id="now"
-                        value="option1"
+                        value="1"
+                        (change)="SetIsCurrent($event.target.value)"
+                        [checked]="IsCurrent"
                     >
                     <label
                         class="work-tab"
@@ -168,7 +163,9 @@
                         type="radio"
                         name="nowOptions"
                         id="old"
-                        value="option2"
+                        value="0"
+                        (change)="SetIsCurrent($event.target.value)"
+                        [checked]="!IsCurrent"
                     >
                     <label
                         class="work-tab"
@@ -184,20 +181,16 @@
         <div class="form-group control-group">
             <label for="workRelation">العلاقة مع العمل</label>
             <select
+                (change)="SelectWorkRelation($event.target.value)"
                 class="form-control"
-                id="workRelation"
-                name="workRelation"
             >
+                <option value="0">-- اختر العلاقة مع العمل --</option>
                 <option
-                    value
-                    disabled
-                    selected
-                >
-                    .
-                </option>
-                <option value="o1">الان</option>
-                <option value="o2">اختيار اخر</option>
-                <option value="o3">اختيار ثالث</option>
+                    *ngFor="let A of WorkRelation"
+                    value="{{A.ID}}"
+                    [innerText]="A.Name"
+                    [selected]="A.ID == WorkRelationID"
+                ></option>
             </select>
         </div>
     </div>
@@ -205,20 +198,16 @@
         <div class="form-group control-group">
             <label for="workDuration">مدة العمل</label>
             <select
+                (change)="SelectWorkDuration($event.target.value)"
                 class="form-control"
-                id="workDuration"
-                name="workDuration"
             >
+                <option value="0">-- اختر مدة العمل --</option>
                 <option
-                    value
-                    disabled
-                    selected
-                >
-                    .
-                </option>
-                <option value="o1">الان</option>
-                <option value="o2">اختيار اخر</option>
-                <option value="o3">اختيار ثالث</option>
+                    *ngFor="let A of WorkDuration"
+                    value="{{A.ID}}"
+                    [innerText]="A.Name"
+                    [selected]="A.ID == WordDurationID"
+                ></option>
             </select>
         </div>
     </div>
@@ -226,20 +215,16 @@
         <div class="form-group control-group">
             <label for="workTime">الوقت المخصص للعمل</label>
             <select
+                (change)="SelectWorkTimePerYear($event.target.value)"
                 class="form-control"
-                id="workTime"
-                name="workTime"
             >
+                <option value="0">-- اختر الوقت المخصص للعمل --</option>
                 <option
-                    value
-                    disabled
-                    selected
-                >
-                    .
-                </option>
-                <option value="o1">الان</option>
-                <option value="o2">اختيار اخر</option>
-                <option value="o3">اختيار ثالث</option>
+                    *ngFor="let A of WorkTimeByYear"
+                    value="{{A.ID}}"
+                    [innerText]="A.Name"
+                    [selected]="A.ID == WorkTimePerYearID"
+                ></option>
             </select>
         </div>
     </div>
@@ -257,6 +242,7 @@
                 class="btn-success form-control"
                 type="submit"
                 value="حفظ وإستمرار"
+                (click)="SendWorkData()"
             >
         </div>
     </li>
