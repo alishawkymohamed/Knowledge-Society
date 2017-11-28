@@ -8,6 +8,7 @@ import { RegisterService } from '../../shared/register.service';
 import { Router } from '@angular/router';
 import { ToastsManager } from 'ng2-toastr';
 import { StringConversion } from '../../shared/StringConverstion';
+import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({
   selector: 'app-personal-data',
@@ -15,10 +16,11 @@ import { StringConversion } from '../../shared/StringConverstion';
   styleUrls: ['./personal-data.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class PersonalDataComponent implements OnInit {
+export class PersonalDataComponent implements OnInit, OnDestroy {
+
   public loading = false; //Loader Controller
 
-  User: any;
+  User: any = null;
   personalDataForm: FormGroup;
 
   firstName: string = null;
@@ -116,11 +118,50 @@ export class PersonalDataComponent implements OnInit {
       )
     }
     else {
-      this.toastr.error("", 'خطأ!');
+      this.loading = false;
+      this.personalDataForm.get('email').markAsTouched();
+      this.personalDataForm.get('confirmPassword').markAsTouched();
+      this.personalDataForm.get('password').markAsTouched();
+      this.personalDataForm.get('firstName').markAsTouched();
+      this.toastr.error("يجب علي الاقل ادخال الاسم الاول و الاخير والبريد الالكتروني وكلمة المرور وتأكيدها", 'خطأ!');
     }
   }
 
   goBack() {
     this.router.navigate(['/account', 'signup', 'extradata']);
+  }
+
+  ngOnDestroy(): void {
+    if (this.User == null) {
+      this.User = {};
+      this.User.ID = 0;
+      this.User.FirstName = this.personalDataForm.get('firstName').value;
+      this.User.LastName = this.personalDataForm.get('lastName').value;
+      this.User.Email = this.personalDataForm.get('email').value;
+      this.User.Password = this.personalDataForm.get('password').value == null ? '' : this.personalDataForm.get('password').value;
+      this.User.Phone = this.personalDataForm.get('phone').value;
+      this.User.Mobile = this.personalDataForm.get('mobile').value;
+      this.User.FaceBook = this.personalDataForm.get('facebook').value;
+      this.User.Instagram = this.personalDataForm.get('instagram').value;
+      this.User.LinkedIn = this.personalDataForm.get('linkedIn').value;
+      this.User.Youtube = this.personalDataForm.get('youtube').value;
+      this.User.Twitter = this.personalDataForm.get('twitter').value;
+      console.log(this.User);
+      this.UserDataService.setUserData(this.User);
+    } else {
+      this.User.FirstName = this.personalDataForm.get('firstName').value;
+      this.User.LastName = this.personalDataForm.get('lastName').value;
+      this.User.Email = this.personalDataForm.get('email').value;
+      this.User.Password = this.personalDataForm.get('password').value == null ? '' : this.personalDataForm.get('password').value;
+      this.User.Phone = this.personalDataForm.get('phone').value;
+      this.User.Mobile = this.personalDataForm.get('mobile').value;
+      this.User.FaceBook = this.personalDataForm.get('facebook').value;
+      this.User.Instagram = this.personalDataForm.get('instagram').value;
+      this.User.LinkedIn = this.personalDataForm.get('linkedIn').value;
+      this.User.Youtube = this.personalDataForm.get('youtube').value;
+      this.User.Twitter = this.personalDataForm.get('twitter').value;
+      console.log(this.User);
+      this.UserDataService.setUserData(this.User);
+    }
   }
 }

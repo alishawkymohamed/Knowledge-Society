@@ -7,8 +7,8 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class ApiService {
-  baseURL: string = 'http://kswebapi.competencysettest.com';
-  //baseURL: string = 'http://localhost:2641';
+  // baseURL: string = 'http://kswebapi.competencysettest.com';
+  baseURL: string = 'http://localhost:2641';
   constructor(private http: Http, ) { }
   ServerRequest(URL: string, Method: string, Data: any) {
     const headers = new Headers({ 'Content-type': 'application/json' });

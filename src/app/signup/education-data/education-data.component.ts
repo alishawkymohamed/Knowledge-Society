@@ -1,3 +1,4 @@
+import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 import { University } from './../../Models/University';
 import { Year } from './../../Models/Year';
 import { Component, OnInit, ViewEncapsulation, ViewContainerRef } from '@angular/core';
@@ -22,7 +23,8 @@ import { BusinessSector } from '../../Models/BusinessSector';
   styleUrls: ['./education-data.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class EducationDataComponent implements OnInit {
+export class EducationDataComponent implements OnInit, OnDestroy {
+
   public loading = true;
   public User: any = null;
   public PersonEducation: PersonEducation[] = [];
@@ -46,33 +48,41 @@ export class EducationDataComponent implements OnInit {
       }, 3000);
     } else {
       this.User = UserDataService.getUserData();
-      if (EducationData.GetData() == null) {
-        ApiService.ServerRequest(`/GeneralData/GetEducationData/${this.User.ID}`, 'GET', null).subscribe(
-          (data) => {
-            EducationData.SetData(data);
-            const Sdata = EducationData.GetForceData();
-            this.PersonEducation = Sdata.PersonEducation;
-            this.Year = Sdata.Year;
-            this.Colledge = Sdata.Colledge;
-            this.Specialization = Sdata.Specialization;
-            this.University = Sdata.University;
-            this.Degree = Sdata.Degree;
-            this.Courses = Sdata.Courses;
-            this.PersonTraining = Sdata.PersonTraining;
-            this.BusinessSector = Sdata.BusinessSector;
-            this.PersonExperience = Sdata.PersonExperience;
-            this.loading = false;
-          }
-        )
-      }
-      else {
-        const Sdata = EducationData.GetData();
-        this.PersonEducation = Sdata.PersonEducation;
-        this.Year = Sdata.Year;
-        this.Colledge = Sdata.Colledge;
-        this.Specialization = Sdata.Specialization;
-        this.University = Sdata.University;
-        this.loading = false;
+      if (UserDataService.getUserData().ID == 0) {
+        this.toastr.info("من فضلك أحفظ البيانات الاساسيه أولا !!", 'تنبيه!');
+        this.loading = true;
+        setTimeout(() => {
+          router.navigateByUrl('/account/signup/personaldata');
+        }, 1500);
+      } else {
+        if (EducationData.GetData() == null) {
+          ApiService.ServerRequest(`/GeneralData/GetEducationData/${this.User.ID}`, 'GET', null).subscribe(
+            (data) => {
+              EducationData.SetData(data);
+              const Sdata = EducationData.GetForceData();
+              this.PersonEducation = Sdata.PersonEducation;
+              this.Year = Sdata.Year;
+              this.Colledge = Sdata.Colledge;
+              this.Specialization = Sdata.Specialization;
+              this.University = Sdata.University;
+              this.Degree = Sdata.Degree;
+              this.Courses = Sdata.Courses;
+              this.PersonTraining = Sdata.PersonTraining;
+              this.BusinessSector = Sdata.BusinessSector;
+              this.PersonExperience = Sdata.PersonExperience;
+              this.loading = false;
+            }
+          )
+        }
+        else {
+          const Sdata = EducationData.GetData();
+          this.PersonEducation = Sdata.PersonEducation;
+          this.Year = Sdata.Year;
+          this.Colledge = Sdata.Colledge;
+          this.Specialization = Sdata.Specialization;
+          this.University = Sdata.University;
+          this.loading = false;
+        }
       }
     }
   }
@@ -138,5 +148,34 @@ export class EducationDataComponent implements OnInit {
 
   goBack() {
     this.router.navigate(['/account', 'signup', 'workdata']);
+  }
+
+  ngOnDestroy(): void {
+    if (this.User != null) {
+      if (this.User.ID != 0) {
+        this.loading = true;
+        this.User.PersonEducations = this.PersonEducation;
+        this.User.PersonTrainings = this.PersonTraining;
+        this.User.PersonExperiences = this.PersonExperience;
+        this.RegisterService.SendRegisterData({ TabName: 'Education Data', PersonalData: this.User }).subscribe(
+          (Response) => {
+            if (Response != false) {
+              this.toastr.success("تم تسجيل البيانات بنجاح ..");
+              this.loading = false;
+              this.UserDataService.setUserData(Response);
+              this.User = this.UserDataService.getUserData();
+            }
+            else {
+              this.loading = false;
+              this.toastr.error("لقد حدث خطأ ما .. من فضلك أعد المحاولة لاحقاً !!", 'خطأ!');
+            }
+          },
+          (error) => {
+            this.loading = false;
+            this.toastr.error(error, 'خطأ!');
+          }
+        )
+      }
+    }
   }
 }

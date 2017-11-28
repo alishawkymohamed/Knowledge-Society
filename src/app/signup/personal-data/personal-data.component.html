@@ -1,99 +1,48 @@
-<form
-    [formGroup]="personalDataForm"
-    (ngSubmit)="onSubmit()"
->
+<form [formGroup]="personalDataForm" (ngSubmit)="onSubmit()">
     <div class="row">
-        <ngx-loading
-            [show]="loading"
-            [config]="{ backdropBorderRadius: '14px' }"
-        ></ngx-loading>
+        <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
         <div class="col-12">
             <h5>البيانات الشخصية</h5>
         </div>
         <div class="col-sm-4">
             <div class="form-group control-group">
                 <label for="firstName">الإسم الأول</label>
-                <input
-                    type="text"
-                    class="form-control"
-                    id="firstName"
-                    name="firstName"
-                    [(ngModel)]="firstName"
-                    formControlName="firstName"
-                >
+                <input type="text" class="form-control" id="firstName" name="firstName" [(ngModel)]="firstName" formControlName="firstName">
             </div>
         </div>
         <div class="col-sm-4">
             <div class="form-group control-group">
                 <label for="lastName">الإسم الأخير</label>
-                <input
-                    type="text"
-                    class="form-control"
-                    id="lastName"
-                    name="lastName"
-                    [(ngModel)]="lastName"
-                    formControlName="lastName"
-                >
+                <input type="text" class="form-control" id="lastName" name="lastName" [(ngModel)]="lastName" formControlName="lastName">
             </div>
         </div>
         <div class="col-sm-4">
             <div class="form-group control-group">
                 <label for="email">البريد الإلكتروني</label>
-                <input
-                    type="email"
-                    class="form-control"
-                    id="email"
-                    name="email"
-                    [(ngModel)]="email"
-                    formControlName="email"
-                >
+                <input type="email" class="form-control" id="email" name="email" [(ngModel)]="email" formControlName="email">
                 <br>
-                <div
-                    *ngIf="!personalDataForm.get('email').valid && personalDataForm.get('email').touched"
-                    class="alert alert-danger"
-                >
+                <div *ngIf="!personalDataForm.get('email').valid && personalDataForm.get('email').touched" class="alert alert-danger">
                     برجاء ادخال بريد الكتروني صالح
                 </div>
             </div>
         </div>
     </div>
-    <div
-        class="row"
-        [hidden]="password"
-    >
+    <div class="row" [hidden]="User!=null && User.ID!=null && User.ID!=0">
         <div class="col-sm-6">
             <div class="form-group control-group">
                 <label for="password">كلمة السر</label>
-                <input
-                    type="password"
-                    class="form-control"
-                    id="password"
-                    name="password"
-                    formControlName="password"
-                >
+                <input type="password" class="form-control" id="password" name="password" formControlName="password">
             </div>
-            <div
-                *ngIf="!personalDataForm.get('password').valid && personalDataForm.get('password').touched"
-                class="alert alert-danger"
-            >
+            <div *ngIf="!personalDataForm.get('password').valid && personalDataForm.get('password').touched" class="alert alert-danger">
                 كلمة السر اقل من 8 حروف
             </div>
         </div>
         <div class="col-sm-6">
             <div class="form-group control-group">
                 <label for="confirmPassword">تأكيد كلمة السر</label>
-                <input
-                    type="password"
-                    class="form-control"
-                    id="confirmPassword"
-                    name="confirmPassword"
-                    formControlName="confirmPassword"
-                >
+                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" formControlName="confirmPassword">
             </div>
-            <div
-                *ngIf="!personalDataForm.get('confirmPassword').valid && personalDataForm.get('confirmPassword').touched"
-                class="alert alert-danger"
-            >
+            <div *ngIf="!personalDataForm.get('confirmPassword').valid && personalDataForm.get('confirmPassword').touched" class="alert alert-danger">
                 كلمة السر غير متطابقة
             </div>
         </div>
@@ -103,27 +52,13 @@
         <div class="col-sm-6">
             <div class="form-group control-group">
                 <label for="phone">رقم الهاتف</label>
-                <input
-                    type="tel"
-                    class="form-control"
-                    id="phone"
-                    name="phone"
-                    [(ngModel)]="phone"
-                    formControlName="phone"
-                >
+                <input type="tel" class="form-control" id="phone" name="phone" [(ngModel)]="phone" formControlName="phone">
             </div>
         </div>
         <div class="col-sm-6">
             <div class="form-group control-group">
                 <label for="mobile">رقم الموبايل</label>
-                <input
-                    type="tel"
-                    class="form-control"
-                    id="mobile"
-                    name="mobile"
-                    [(ngModel)]="mobile"
-                    formControlName="mobile"
-                >
+                <input type="tel" class="form-control" id="mobile" name="mobile" [(ngModel)]="mobile" formControlName="mobile">
             </div>
         </div>
     </div>
@@ -134,100 +69,49 @@
         <div class="col-sm-4">
             <div class="form-group control-group">
                 <label for="facebook">الفيس بوك</label>
-                <input
-                    type="text"
-                    class="selectrs form-control"
-                    id="facebook"
-                    name="facebook"
-                    [(ngModel)]="facebook"
-                    formControlName="facebook"
-                >
+                <input type="text" class="selectrs form-control" id="facebook" name="facebook" [(ngModel)]="facebook" formControlName="facebook">
             </div>
         </div>
         <div class="col-sm-4">
             <div class="form-group control-group">
                 <label for="instagram">انستجرام</label>
-                <input
-                    type="text"
-                    class="selectrs form-control"
-                    id="instagram"
-                    name="instagram"
-                    [(ngModel)]="instagram"
-                    formControlName="instagram"
-                >
+                <input type="text" class="selectrs form-control" id="instagram" name="instagram" [(ngModel)]="instagram" formControlName="instagram">
             </div>
         </div>
         <div class="col-sm-4">
             <div class="form-group control-group">
                 <label for="linkedin">لينكد ان</label>
-                <input
-                    type="text"
-                    class="selectrs form-control"
-                    id="linkedin"
-                    name="linkedin"
-                    [(ngModel)]="linkedIn"
-                    formControlName="linkedIn"
-                >
+                <input type="text" class="selectrs form-control" id="linkedin" name="linkedin" [(ngModel)]="linkedIn" formControlName="linkedIn">
             </div>
         </div>
         <div class="col-sm-4">
             <div class="form-group control-group">
                 <label for="youtube">يوتيوب</label>
-                <input
-                    type="text"
-                    class="selectrs form-control"
-                    id="youtube"
-                    name="youtube"
-                    [(ngModel)]="youtube"
-                    formControlName="youtube"
-                >
+                <input type="text" class="selectrs form-control" id="youtube" name="youtube" [(ngModel)]="youtube" formControlName="youtube">
             </div>
         </div>
         <div class="col-sm-4">
             <div class="form-group control-group">
                 <label for="twitter">تويتر</label>
-                <input
-                    type="text"
-                    class="selectrs form-control"
-                    id="twitter"
-                    name="twitter"
-                    [(ngModel)]="twitter"
-                    formControlName="twitter"
-                >
+                <input type="text" class="selectrs form-control" id="twitter" name="twitter" [(ngModel)]="twitter" formControlName="twitter">
             </div>
         </div>
     </div>
     <div class="pager wizard row justify-content-center">
         <li class="col-lg-2 col-md-3 col-sm-4 next">
             <div class="form-group">
-                <label
-                    for
-                    style="opacity:0"
-                >
+                <label for style="opacity:0">
                     حفظ وإستمرار
                 </label>
-                <input
-                    [disabled]="!personalDataForm.valid"
-                    class="btn-success form-control"
-                    type="submit"
-                    value="حفظ وإستمرار"
-                >
+                <input class="btn-success form-control" type="submit" value="حفظ وإستمرار">
             </div>
         </li>
         <li class="col-lg-2 col-md-3 col-sm-4 previous disabled">
             <div class="form-group">
-                <label
-                    for
-                    style="opacity:0"
-                >
+                <label for style="opacity:0">
                     العودة
                 </label>
-                <input
-                    class="btn-success form-control"
-                    type="button"
-                    value="العودة"
-                    (click)="goBack()"
-                >
+                <input class="btn-success form-control" type="button" value="العودة" (click)="goBack()">
             </div>
         </li>
     </div>

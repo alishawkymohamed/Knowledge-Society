@@ -6,6 +6,7 @@ import { ToastsManager } from 'ng2-toastr';
 import { WorkDataService } from '../../shared/work-data.service';
 import { RegisterService } from '../../shared/register.service';
 import { Router } from '@angular/router';
+import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({
   selector: 'app-work-data',
@@ -13,7 +14,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./work-data.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class WorkDataComponent {
+export class WorkDataComponent implements OnDestroy {
+
 
   public loading = false;
 
@@ -52,7 +54,7 @@ export class WorkDataComponent {
 
     this.toastr.setRootViewContainerRef(vcr); // Toaster
     this.loading = true;
-
+    debugger;
     if (this.UserDataService.getUserData() == null) {
       this.toastr.info("من فضلك أدخل البيانات الأساسية أولا !!", "تنبيه");
       setTimeout(() => {
@@ -60,51 +62,60 @@ export class WorkDataComponent {
       }, 3000);
     }
     else {
-      if (this.WorkDataService.GetData() == null) {
-        this.ApiService.ServerRequest('/GeneralData/GetWorkData', 'GET', null).subscribe(
-          (data) => {
-            this.WorkDataService.SetData(data);
-            const Sdata = this.WorkDataService.GetData();
+      this.User = UserDataService.getUserData();
+      if (UserDataService.getUserData().ID == 0) {
+        this.toastr.info("من فضلك أحفظ البيانات الاساسيه أولا !!", 'تنبيه!');
+        this.loading = true;
+        setTimeout(() => {
+          router.navigateByUrl('/account/signup/personaldata');
+        }, 1500);
+      } else {
+        if (this.WorkDataService.GetData() == null) {
+          this.ApiService.ServerRequest('/GeneralData/GetWorkData', 'GET', null).subscribe(
+            (data) => {
+              this.WorkDataService.SetData(data);
+              const Sdata = this.WorkDataService.GetData();
 
-            this.GovernrateArray = Sdata.WorkGoverates;
-            this.VillageArray = Sdata.WorkVillage;
-            this.AreaArray = Sdata.WorkArea;
-            this.WorkTypes = Sdata.WorkTypes;
-            this.WorkDuration = Sdata.WorkDuration;
-            this.WorkRelation = Sdata.WorkRelation;
-            this.WorkTimeByYear = Sdata.WorkTimeByYear;
-            this.WorkEquaties = Sdata.WorkEquaties;
-            this.WorkStatus = Sdata.WorkStatus;
+              this.GovernrateArray = Sdata.WorkGoverates;
+              this.VillageArray = Sdata.WorkVillage;
+              this.AreaArray = Sdata.WorkArea;
+              this.WorkTypes = Sdata.WorkTypes;
+              this.WorkDuration = Sdata.WorkDuration;
+              this.WorkRelation = Sdata.WorkRelation;
+              this.WorkTimeByYear = Sdata.WorkTimeByYear;
+              this.WorkEquaties = Sdata.WorkEquaties;
+              this.WorkStatus = Sdata.WorkStatus;
 
-            this.LoadUserData();
+              this.LoadUserData();
 
-            if (data) {
-              this.loading = false;
+              if (data) {
+                this.loading = false;
+              }
+            },
+            (error) => {
+              if (error) {
+                this.loading = false;
+                this.toastr.error("لقد حدث خطأ ما .. من فضلك أعد المحاولة لاحقاً !!", 'خطأ!');
+              }
             }
-          },
-          (error) => {
-            if (error) {
-              this.loading = false;
-              this.toastr.error("لقد حدث خطأ ما .. من فضلك أعد المحاولة لاحقاً !!", 'خطأ!');
-            }
-          }
-        )
-      }
-      else {
-        const Sdata = this.WorkDataService.GetData();
+          )
+        }
+        else {
+          const Sdata = this.WorkDataService.GetData();
 
-        this.GovernrateArray = Sdata.WorkGoverates;
-        this.VillageArray = Sdata.WorkVillage;
-        this.AreaArray = Sdata.WorkArea;
-        this.WorkTypes = Sdata.WorkTypes;
-        this.WorkDuration = Sdata.WorkDuration;
-        this.WorkRelation = Sdata.WorkRelation;
-        this.WorkTimeByYear = Sdata.WorkTimeByYear;
-        this.WorkEquaties = Sdata.WorkEquaties;
-        this.WorkStatus = Sdata.WorkStatus;
+          this.GovernrateArray = Sdata.WorkGoverates;
+          this.VillageArray = Sdata.WorkVillage;
+          this.AreaArray = Sdata.WorkArea;
+          this.WorkTypes = Sdata.WorkTypes;
+          this.WorkDuration = Sdata.WorkDuration;
+          this.WorkRelation = Sdata.WorkRelation;
+          this.WorkTimeByYear = Sdata.WorkTimeByYear;
+          this.WorkEquaties = Sdata.WorkEquaties;
+          this.WorkStatus = Sdata.WorkStatus;
 
-        this.LoadUserData();
-        this.loading = false;
+          this.LoadUserData();
+          this.loading = false;
+        }
       }
     }
 
@@ -224,5 +235,45 @@ export class WorkDataComponent {
 
   goBack() {
     this.router.navigate(['/account', 'signup', 'birthdaydata']);
+  }
+
+  ngOnDestroy(): void {
+    if (this.User != null) {
+      if (this.User.ID != 0) {
+        this.loading = true;
+        let personalData = {
+          TabName: "Work Data",
+          PersonalData: {
+            Id: this.User.ID,
+            PersonWorkData: {
+              PersonID: this.User.ID,
+              GovernateID: this.WorkGovernmentID,
+              AreaID: this.WorkAreaID,
+              VillageID: this.WorkVillageID,
+              WorkEquityID: this.WorkEquityID,
+              WorkTypeID: this.WorkTypeID,
+              JobRelationID: this.WorkRelationID,
+              IsCurrent: this.IsCurrent,
+              JobDurationID: this.WordDurationID,
+              JobHoursPerYearID: this.WorkTimePerYearID,
+              WorkStatusID: this.WorkStatusID
+            }
+          }
+        }
+        this.RegisterService.SendRegisterData(personalData).subscribe(
+          (data) => {
+            if (data != false) {
+              this.UserDataService.setUserData(data);
+              this.User = this.UserDataService.getUserData();
+              this.loading = false;
+            }
+            else {
+              this.loading = false;
+              this.toastr.error("لقد حدث خطأ ما .. من فضلك أعد المحاولة لاحقاً !!", 'خطأ!');
+            }
+          }
+        )
+      }
+    }
   }
 }

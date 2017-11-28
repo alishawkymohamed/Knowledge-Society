@@ -32,49 +32,58 @@ export class ExtraDataComponent {
         router.navigateByUrl('/account/signup/personaldata');
       }, 3000);
     } else {
-      if (ExtraDataService.GetData() == null) {
-        this.User = UserDataService.getUserData();
-        ApiService.ServerRequest(`/GeneralData/GetExtraData/${this.User.ID}`, 'GET', null).subscribe(
-          (Data) => {
-            this.loading = false;
-            ExtraDataService.SetData(Data);
-            this.Qualifications = Data.Qualifications;
-            this.QualificationLevels = Data.QualificationLevels;
-            this.PersonQualifications = Data.PersonQualifications;
-            for (let index = 0; index < this.Qualifications.length; index++) {
-              var temp = this.PersonQualifications.filter(
-                (value) => { return value.QualificationID == this.Qualifications[index].ID && value.PersonID == this.User.ID }
-              );
-              if (temp.length == 0) {
-                this.PersonGrades.push(0);
-              } else {
-                this.PersonGrades.push(temp[0].QualificationLevelID);
+      this.User = UserDataService.getUserData();
+      if (UserDataService.getUserData().ID == 0) {
+        this.toastr.info("من فضلك أحفظ البيانات الاساسيه أولا !!", 'تنبيه!');
+        this.loading = true;
+        setTimeout(() => {
+          router.navigateByUrl('/account/signup/personaldata');
+        }, 1500);
+      } else {
+        if (ExtraDataService.GetData() == null) {
+          this.User = UserDataService.getUserData();
+          ApiService.ServerRequest(`/GeneralData/GetExtraData/${this.User.ID}`, 'GET', null).subscribe(
+            (Data) => {
+              this.loading = false;
+              ExtraDataService.SetData(Data);
+              this.Qualifications = Data.Qualifications;
+              this.QualificationLevels = Data.QualificationLevels;
+              this.PersonQualifications = Data.PersonQualifications;
+              for (let index = 0; index < this.Qualifications.length; index++) {
+                var temp = this.PersonQualifications.filter(
+                  (value) => { return value.QualificationID == this.Qualifications[index].ID && value.PersonID == this.User.ID }
+                );
+                if (temp.length == 0) {
+                  this.PersonGrades.push(0);
+                } else {
+                  this.PersonGrades.push(temp[0].QualificationLevelID);
+                }
               }
+
+
+            },
+            (error) => {
+              this.toastr.error("لقد حدث خطأ ما .. من فضلك أعد المحاولة لاحقاً !!", 'خطأ!');
             }
 
-
-          },
-          (error) => {
-            this.toastr.error("لقد حدث خطأ ما .. من فضلك أعد المحاولة لاحقاً !!", 'خطأ!');
-          }
-
-        );
-
-      } else {
-        this.loading = false;
-        this.User = UserDataService.getUserData();
-        const SData = ExtraDataService.GetData();
-        this.Qualifications = SData.Qualifications;
-        this.QualificationLevels = SData.QualificationLevels;
-        this.PersonQualifications = SData.PersonQualifications;
-        for (let index = 0; index < this.Qualifications.length; index++) {
-          var temp = this.PersonQualifications.filter(
-            (value) => { return value.QualificationID == this.Qualifications[index].ID && value.PersonID == this.User.ID }
           );
-          if (temp.length == 0) {
-            this.PersonGrades.push(0);
-          } else {
-            this.PersonGrades.push(temp[0].QualificationLevelID);
+
+        } else {
+          this.loading = false;
+          this.User = UserDataService.getUserData();
+          const SData = ExtraDataService.GetData();
+          this.Qualifications = SData.Qualifications;
+          this.QualificationLevels = SData.QualificationLevels;
+          this.PersonQualifications = SData.PersonQualifications;
+          for (let index = 0; index < this.Qualifications.length; index++) {
+            var temp = this.PersonQualifications.filter(
+              (value) => { return value.QualificationID == this.Qualifications[index].ID && value.PersonID == this.User.ID }
+            );
+            if (temp.length == 0) {
+              this.PersonGrades.push(0);
+            } else {
+              this.PersonGrades.push(temp[0].QualificationLevelID);
+            }
           }
         }
       }
@@ -131,5 +140,33 @@ export class ExtraDataComponent {
 
   goBack() {
     this.router.navigate(['/account', 'signup', 'educationdata']);
+  }
+  ngOnDestroy(): void {
+    if (this.User != null) {
+      if (this.User.ID != 0) {
+        this.loading = true;
+        this.User.PersonQualifications = this.PersonQualifications;
+        this.RegisterService.SendRegisterData({ TabName: 'Extra Data', PersonalData: this.User }).subscribe(
+          (Response) => {
+            if (Response != false) {
+              this.toastr.success("تم تسجيل البيانات بنجاح ..");
+              this.PersonQualifications = Response.PersonQualifications;
+              this.ExtraDataService.SetPersonQualifications(Response.PersonQualifications);
+              this.UserDataService.setUserData(Response);
+              this.User = this.UserDataService.getUserData();
+              this.loading = false;
+            }
+            else {
+              this.loading = false;
+              this.toastr.error("لقد حدث خطأ ما .. من فضلك أعد المحاولة لاحقاً !!", 'خطأ!');
+            }
+          },
+          (error) => {
+            this.loading = false;
+            this.toastr.error(error, 'خطأ!');
+          }
+        )
+      }
+    }
   }
 }
